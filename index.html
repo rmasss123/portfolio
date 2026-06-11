@@ -1,606 +1,310 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sangam Tiwari - Portfolio</title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- AOS CSS -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sangam Tiwari — AI & Data Engineer</title>
+<meta name="description" content="Sangam Tiwari builds production LLM systems — call scoring pipelines, early-warning systems, and data infrastructure at Leap Scholar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Sora:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="#home">ST</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero-section">
-        <div class="container h-100">
-            <div class="row h-100 align-items-center">
-                <div class="col-lg-6" data-aos="fade-right">
-                    <div class="profile-image-container">
-                        <img src="assets/profile.jpeg" alt="Sangam Tiwari" class="profile-image">
-                    </div>
-                </div>
-                <div class="col-lg-6" data-aos="fade-left">
-                    <div class="hero-content">
-                        <h1 class="display-4 fw-bold mb-2" data-aos="fade-up">Hello,</h1>
-                        <h2 class="display-5 mb-2" data-aos="fade-up" data-aos-delay="100">My name is</h2>
-                        <h1 class="display-4 fw-bold mb-4" data-aos="fade-up" data-aos-delay="200">Sangam Tiwari</h1>
-                        <div class="role-text" id="role-typer"></div>
-                        <div class="hero-buttons mt-4" data-aos="fade-up" data-aos-delay="400">
-                            <a href="assets/Sangam_Tiwari_Resume.pdf" target="_blank" class="btn btn-primary resume-btn">
-                                <i class="fas fa-download me-2"></i>Resume
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="particles-js"></div>
-    </section>
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+<div class="scroll-progress" aria-hidden="true"></div>
+<div class="grid-overlay" aria-hidden="true"></div>
 
-    <!-- Quick Links Section -->
-    <section class="section-padding bg-light">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4" data-aos="fade-up">
-                    <div class="quick-link-card">
-                        <i class="fas fa-user"></i>
-                        <h3>About Me</h3>
-                        <p>Learn more about my background, education, and experience.</p>
-                        <a href="#about" class="btn btn-primary">Learn More</a>
-                    </div>
-                </div>
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="quick-link-card">
-                        <i class="fas fa-code"></i>
-                        <h3>Skills</h3>
-                        <p>Explore my technical skills and expertise in various technologies.</p>
-                        <a href="skills.html" class="btn btn-primary">View Skills</a>
-                    </div>
-                </div>
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="quick-link-card">
-                        <i class="fas fa-project-diagram"></i>
-                        <h3>Projects</h3>
-                        <p>Check out my latest projects and technical achievements.</p>
-                        <a href="#projects" class="btn btn-primary">View Projects</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <a class="nav-logo" href="#top" data-magnetic>
+    <span class="logo-bracket">[</span>ST<span class="logo-bracket">]</span>
+  </a>
+  <nav class="nav-links" aria-label="Sections">
+    <a href="#about"><span class="nav-idx">01</span>About</a>
+    <a href="#experience"><span class="nav-idx">02</span>Experience</a>
+    <a href="#projects"><span class="nav-idx">03</span>Projects</a>
+    <a href="#skills"><span class="nav-idx">04</span>Skills</a>
+    <a href="#contact"><span class="nav-idx">05</span>Contact</a>
+  </nav>
+  <div class="nav-right">
+    <span class="nav-clock mono" id="ist-clock" title="My local time">--:--:-- IST</span>
+    <a class="btn btn-amber" href="assets/Sangam_Tiwari_Resume.pdf" target="_blank" rel="noopener" data-magnetic>Resume ↗</a>
+  </div>
+</header>
 
-    <!-- About Section -->
-    <section id="about" class="about-section">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-10" data-aos="fade-up">
-                    <div class="about-content">
-                        <div class="section-header">
-                            <h2>About Me</h2>
-                            <div class="section-line"></div>
-                        </div>
-                        <div class="about-text">
-                            <p>I am a final year student pursuing Mathematics and Data Science at National Institute of Technology, Bhopal. My academic journey has equipped me with a strong foundation in mathematical concepts, statistical analysis, and data science principles.</p>
-                            <p>With a keen interest in machine learning and artificial intelligence, I am constantly exploring new technologies and methodologies to solve complex problems. I am particularly passionate about applying mathematical models and data-driven approaches to real-world challenges.</p>
-                        </div>
-                        <div class="about-cards">
-                            <div class="about-card" data-aos="fade-up" data-aos-delay="100">
-                                <div class="card-icon">
-                                    <i class="fas fa-graduation-cap"></i>
-                                </div>
-                                <div class="card-content">
-                                    <h4>Education</h4>
-                                    <p>B.Tech in Mathematics and Data Science<br>NIT Bhopal</p>
-                                </div>
-                            </div>
-                            <div class="about-card" data-aos="fade-up" data-aos-delay="200">
-                                <div class="card-icon">
-                                    <i class="fas fa-laptop-code"></i>
-                                </div>
-                                <div class="card-content">
-                                    <h4>Current Status</h4>
-                                    <p>Final Year Student</p>
-                                </div>
-                            </div>
-                            <div class="about-card" data-aos="fade-up" data-aos-delay="300">
-                                <div class="card-icon">
-                                    <i class="fas fa-code"></i>
-                                </div>
-                                <div class="card-content">
-                                    <h4>Skills</h4>
-                                    <p>Python, Machine Learning,<br>Data Analysis, Mathematics</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="about-stats">
-                            <div class="stat-item" data-aos="fade-up" data-aos-delay="400">
-                                <span class="stat-number">8.88</span>
-                                <span class="stat-label">CGPA</span>
-                            </div>
-                        </div>
-                        <div class="about-cta">
-                            <a href="#contact" class="btn btn-primary">Contact Me</a>
-                            <a href="#projects" class="btn btn-outline">View Projects</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<main id="top">
 
-    <!-- Skills Section -->
-    <section id="skills" class="skills-section">
-        <div class="container">
-            <div class="section-header text-center mb-5" data-aos="fade-up">
-                <h2 class="section-title">Technical Skills</h2>
-                <div class="section-line"></div>
-            </div>
-            
-            <!-- Languages -->
-            <div class="skills-category mb-5" data-aos="fade-up">
-                <h3 class="category-title"><i class="fas fa-code"></i> Languages</h3>
-                <div class="skills-grid">
-                    <div class="skill-card" data-aos="fade-up" data-aos-delay="100">
-                        <div class="skill-icon">
-                            <i class="fab fa-python"></i>
-                        </div>
-                        <h4>Python</h4>
-                        <div class="skill-level">
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot"></span>
-                        </div>
-                    </div>
-                    <div class="skill-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="skill-icon">
-                            <i class="fas fa-code"></i>
-                        </div>
-                        <h4>C++</h4>
-                        <div class="skill-level">
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot"></span>
-                        </div>
-                    </div>
-                    <div class="skill-card" data-aos="fade-up" data-aos-delay="300">
-                        <div class="skill-icon">
-                            <i class="fab fa-js"></i>
-                        </div>
-                        <h4>JavaScript</h4>
-                        <div class="skill-level">
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot"></span>
-                        </div>
-                    </div>
-                    <div class="skill-card" data-aos="fade-up" data-aos-delay="400">
-                        <div class="skill-icon">
-                            <i class="fas fa-database"></i>
-                        </div>
-                        <h4>SQL</h4>
-                        <div class="skill-level">
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot"></span>
-                        </div>
-                    </div>
-                    <div class="skill-card" data-aos="fade-up" data-aos-delay="500">
-                        <div class="skill-icon">
-                            <i class="fab fa-html5"></i>
-                        </div>
-                        <h4>HTML/CSS</h4>
-                        <div class="skill-level">
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <canvas id="wave" aria-hidden="true"></canvas>
+  <div class="chip-layer" id="chip-layer" aria-hidden="true"></div>
 
-            <!-- Web Development -->
-            <div class="skills-category mb-5" data-aos="fade-up">
-                <h3 class="category-title"><i class="fas fa-laptop-code"></i> Web Development</h3>
-                <div class="skills-grid">
-                    <div class="skill-card" data-aos="fade-up" data-aos-delay="100">
-                        <div class="skill-icon">
-                            <i class="fab fa-react"></i>
-                        </div>
-                        <h4>React.js</h4>
-                        <div class="skill-level">
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot"></span>
-                        </div>
-                    </div>
-                    <div class="skill-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="skill-icon">
-                            <i class="fab fa-node-js"></i>
-                        </div>
-                        <h4>Node.js</h4>
-                        <div class="skill-level">
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot"></span>
-                        </div>
-                    </div>
-                    <div class="skill-card" data-aos="fade-up" data-aos-delay="300">
-                        <div class="skill-icon">
-                            <i class="fas fa-server"></i>
-                        </div>
-                        <h4>Express.js</h4>
-                        <div class="skill-level">
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot"></span>
-                        </div>
-                    </div>
-                    <div class="skill-card" data-aos="fade-up" data-aos-delay="400">
-                        <div class="skill-icon">
-                            <i class="fas fa-plug"></i>
-                        </div>
-                        <h4>REST APIs</h4>
-                        <div class="skill-level">
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot"></span>
-                        </div>
-                    </div>
-                    <div class="skill-card" data-aos="fade-up" data-aos-delay="500">
-                        <div class="skill-icon">
-                            <i class="fas fa-paint-brush"></i>
-                        </div>
-                        <h4>Bootstrap/Tailwind</h4>
-                        <div class="skill-level">
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <div class="hero-inner">
+    <p class="terminal-line mono"><span class="t-prompt">ubuntu@ec2</span>:<span class="t-path">~</span>$ <span id="term-typed"></span><span class="t-caret">▌</span></p>
 
-            <!-- Tools & Technologies -->
-            <div class="skills-category mb-5" data-aos="fade-up">
-                <h3 class="category-title"><i class="fas fa-tools"></i> Tools & Technologies</h3>
-                <div class="skills-grid">
-                    <div class="skill-card" data-aos="fade-up" data-aos-delay="100">
-                        <div class="skill-icon">
-                            <i class="fab fa-git-alt"></i>
-                        </div>
-                        <h4>Git & GitHub</h4>
-                        <div class="skill-level">
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot"></span>
-                        </div>
-                    </div>
-                    <div class="skill-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="skill-icon">
-                            <i class="fas fa-code"></i>
-                        </div>
-                        <h4>VS Code</h4>
-                        <div class="skill-level">
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                        </div>
-                    </div>
-                    <div class="skill-card" data-aos="fade-up" data-aos-delay="300">
-                        <div class="skill-icon">
-                            <i class="fas fa-book"></i>
-                        </div>
-                        <h4>Jupyter</h4>
-                        <div class="skill-level">
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot"></span>
-                        </div>
-                    </div>
-                    <div class="skill-card" data-aos="fade-up" data-aos-delay="400">
-                        <div class="skill-icon">
-                            <i class="fas fa-cloud"></i>
-                        </div>
-                        <h4>Google Colab</h4>
-                        <div class="skill-level">
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot"></span>
-                        </div>
-                    </div>
-                    <div class="skill-card" data-aos="fade-up" data-aos-delay="500">
-                        <div class="skill-icon">
-                            <i class="fas fa-chart-bar"></i>
-                        </div>
-                        <h4>Tableau</h4>
-                        <div class="skill-level">
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <h1 class="hero-name">
+      <span class="line"><span class="word">Sangam</span></span>
+      <span class="line"><span class="word">Tiwari<span class="dot-amber">.</span></span></span>
+    </h1>
 
-            <!-- Core Concepts -->
-            <div class="skills-category mb-5" data-aos="fade-up">
-                <h3 class="category-title"><i class="fas fa-brain"></i> Core Concepts</h3>
-                <div class="skills-grid">
-                    <div class="skill-card" data-aos="fade-up" data-aos-delay="100">
-                        <div class="skill-icon">
-                            <i class="fas fa-sitemap"></i>
-                        </div>
-                        <h4>Data Structures</h4>
-                        <div class="skill-level">
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot"></span>
-                        </div>
-                    </div>
-                    <div class="skill-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="skill-icon">
-                            <i class="fas fa-cogs"></i>
-                        </div>
-                        <h4>Algorithms</h4>
-                        <div class="skill-level">
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot"></span>
-                        </div>
-                    </div>
-                    <div class="skill-card" data-aos="fade-up" data-aos-delay="300">
-                        <div class="skill-icon">
-                            <i class="fas fa-cube"></i>
-                        </div>
-                        <h4>OOP</h4>
-                        <div class="skill-level">
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                        </div>
-                    </div>
-                    <div class="skill-card" data-aos="fade-up" data-aos-delay="400">
-                        <div class="skill-icon">
-                            <i class="fas fa-network-wired"></i>
-                        </div>
-                        <h4>Computer Networks</h4>
-                        <div class="skill-level">
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot"></span>
-                        </div>
-                    </div>
-                    <div class="skill-card" data-aos="fade-up" data-aos-delay="500">
-                        <div class="skill-icon">
-                            <i class="fas fa-database"></i>
-                        </div>
-                        <h4>DBMS</h4>
-                        <div class="skill-level">
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <p class="hero-role mono"><span class="role-pre">// </span><span id="role-typed"></span></p>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects-section">
-        <div class="container">
-            <div class="section-header text-center mb-5" data-aos="fade-up">
-                <h2 class="section-title">My Projects</h2>
-                <div class="section-line"></div>
-            </div>
-            
-            <div class="row">
-                <div class="col-lg-4 col-md-6" data-aos="fade-up">
-                    <a href="https://drive.google.com/drive/u/1/folders/1RPSLO3YMUOiNuQHxU0BbGa5KI-SC9OOU" target="_blank" class="text-decoration-none">
-                        <div class="project-card">
-                            <div class="project-image">
-                                <img src="assets/sentiment-analysis.jpg" alt="Sentiment Analysis Project">
-                            </div>
-                            <div class="project-content">
-                                <h3>Sentiment Analysis using Deep Learning</h3>
-                                <p>Deep learning models for sentiment classification using BiLSTM architectures. Developed models with Conv1D layers, preprocessed over 2 million text samples, achieved 95% accuracy.</p>
-                                <div class="tech-stack">
-                                    <span>Python</span>
-                                    <span>TensorFlow</span>
-                                    <span>Keras</span>
-                                    <span>BiLSTM</span>
-                                    <span>NLP</span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                    <a href="https://github.com/rmasss123/Human-Activity-Recognition-using-CNN" target="_blank" class="text-decoration-none">
-                        <div class="project-card">
-                            <div class="project-image">
-                                <img src="assets/activity-recognition.jpg" alt="Human Activity Recognition Project">
-                            </div>
-                            <div class="project-content">
-                                <h3>Human Activity Recognition</h3>
-                                <p>HAR system using CNNs to classify 15 human activities from images. Implemented multiple deep CNN models, trained on over 12,000 labeled images.</p>
-                                <div class="tech-stack">
-                                    <span>Python</span>
-                                    <span>TensorFlow</span>
-                                    <span>CNN</span>
-                                    <span>Transfer Learning</span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                    <a href="https://www.kaggle.com/code/sngmtiwri/heart-disease-prediction" target="_blank" class="text-decoration-none">
-                        <div class="project-card">
-                            <div class="project-image">
-                                <img src="assets/heart-disease.jpg" alt="Heart Disease Prediction Project">
-                            </div>
-                            <div class="project-content">
-                                <h3>Heart Disease Prediction</h3>
-                                <p>Machine learning model using logistic regression for heart disease risk assessment. Analyzed clinical features, performed EDA and feature engineering.</p>
-                                <div class="tech-stack">
-                                    <span>Python</span>
-                                    <span>Scikit-learn</span>
-                                    <span>Pandas</span>
-                                    <span>Logistic Regression</span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+    <p class="hero-sub">I turn raw conversations into signal — building LLM pipelines that
+      score <em>thousands of counselling calls</em>, flag at-risk students from WhatsApp chats,
+      and ship the data infrastructure underneath it all.</p>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <div class="section-header text-center mb-5" data-aos="fade-up">
-                <h2 class="section-title">Get In Touch</h2>
-                <div class="section-line"></div>
-            </div>
-            
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="contact-content text-center" data-aos="fade-up">
-                        <p class="lead mb-5">Feel free to reach out to me for any opportunities or collaborations.</p>
-                        <div class="social-links">
-                            <a href="https://github.com/rmasss123" target="_blank" class="social-link">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <a href="https://www.linkedin.com/in/sangam-tiwari-a03473257/" target="_blank" class="social-link">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="hero-cta">
+      <a class="btn btn-amber" href="#experience" data-magnetic>See the pipeline ↓</a>
+      <a class="btn btn-ghost" href="#contact" data-magnetic>Get in touch</a>
+    </div>
+  </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <p>&copy; 2024 Sangam Tiwari. All rights reserved.</p>
-                </div>
-                <div class="col-md-6">
-                    <div class="social-links text-end">
-                        <a href="https://github.com/sangam2510" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href="https://www.linkedin.com/in/sangam-tiwari-2510/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://twitter.com/sangam2510" target="_blank"><i class="fab fa-x-twitter"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+  <div class="hero-meta mono" aria-hidden="true">
+    <span><i class="pulse-dot"></i> systems online</span>
+    <span>BENGALURU · 12.97°N 77.59°E</span>
+    <span>scroll ↓</span>
+  </div>
+</section>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-    <script src="js/main.js"></script>
-    <script>
-    const roles = ["Developer", "ML Enthusiast", "Problem Solver"];
-    const el = document.getElementById("role-typer");
-    let roleIdx = 0, charIdx = 0, typing = true;
+<!-- ============ MARQUEE ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track mono">
+    <span>OpenAI GPT-4.1</span><span>◆</span><span>LangChain</span><span>◆</span><span>BigQuery</span><span>◆</span><span>Python</span><span>◆</span><span>LightGBM</span><span>◆</span><span>FastAPI</span><span>◆</span><span>Next.js</span><span>◆</span><span>AWS EC2</span><span>◆</span><span>Playwright</span><span>◆</span><span>SHAP</span><span>◆</span><span>SQL</span><span>◆</span>
+    <span>OpenAI GPT-4.1</span><span>◆</span><span>LangChain</span><span>◆</span><span>BigQuery</span><span>◆</span><span>Python</span><span>◆</span><span>LightGBM</span><span>◆</span><span>FastAPI</span><span>◆</span><span>Next.js</span><span>◆</span><span>AWS EC2</span><span>◆</span><span>Playwright</span><span>◆</span><span>SHAP</span><span>◆</span><span>SQL</span><span>◆</span>
+  </div>
+</div>
 
-    function typeRole() {
-        const current = roles[roleIdx];
-        if (typing) {
-            el.innerHTML = `<span style="color:#8B4513;">${current.slice(0, charIdx)}<span class="cursor">|</span></span>`;
-            if (charIdx < current.length) {
-                charIdx++;
-                setTimeout(typeRole, 170);
-            } else {
-                typing = false;
-                setTimeout(typeRole, 1200);
-            }
-        } else {
-            el.innerHTML = `<span style="color:#8B4513;">${current.slice(0, charIdx)}<span class="cursor">|</span></span>`;
-            if (charIdx > 0) {
-                charIdx--;
-                setTimeout(typeRole, 70);
-            } else {
-                typing = true;
-                roleIdx = (roleIdx + 1) % roles.length;
-                setTimeout(typeRole, 300);
-            }
-        }
-    }
-    typeRole();
-    </script>
+<!-- ============ ABOUT ============ -->
+<section class="section" id="about">
+  <div class="section-head reveal">
+    <span class="eyebrow mono">01 / WHO</span>
+    <h2>Signal &gt; noise</h2>
+  </div>
+
+  <div class="about-grid">
+    <div class="about-photo reveal">
+      <div class="photo-frame">
+        <img src="assets/profile.jpeg" alt="Portrait of Sangam Tiwari">
+        <div class="photo-scan" aria-hidden="true"></div>
+        <span class="photo-tag mono">subject: tiwari_s · status: shipping</span>
+      </div>
+    </div>
+
+    <div class="about-copy reveal">
+      <p>I'm an <strong>Engineering Intern at Leap Finance (Leap Scholar)</strong> in Bengaluru,
+        where I build the AI systems that listen to every counselling conversation the
+        business has — then score them, translate them, and raise a hand when a student
+        is about to slip away.</p>
+      <p>My home turf is the seam between <span class="hl-amber">LLM engineering</span> and
+        <span class="hl-cyan">data engineering</span>: prompt-driven scoring systems on OpenAI
+        models, BigQuery pipelines that feed them, and the Next.js + FastAPI surfaces
+        people actually use. B.Tech in Mathematics &amp; Data Science, NIT Bhopal.</p>
+
+      <div class="stats">
+        <div class="stat"><span class="stat-num mono" data-count="96.5" data-suffix="%">0</span><span class="stat-label">LLM scoring accuracy</span></div>
+        <div class="stat"><span class="stat-num mono" data-count="50" data-suffix="×">0</span><span class="stat-label">audit coverage boost</span></div>
+        <div class="stat"><span class="stat-num mono" data-count="100" data-suffix="K+">0</span><span class="stat-label">courses indexed</span></div>
+        <div class="stat"><span class="stat-num mono" data-count="8.71" data-decimals="2">0</span><span class="stat-label">CGPA · NIT Bhopal</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPERIENCE / PIPELINE ============ -->
+<section class="section" id="experience">
+  <div class="section-head reveal">
+    <span class="eyebrow mono">02 / THE PIPELINE</span>
+    <h2>Leap Finance <span class="head-dim">(Leap Scholar)</span></h2>
+    <p class="head-sub mono">ENGINEERING INTERN · BENGALURU · JAN 2026 — PRESENT</p>
+  </div>
+
+  <div class="pipeline">
+    <div class="pipe-rail" aria-hidden="true"><div class="pipe-flow"></div></div>
+
+    <article class="stage reveal">
+      <div class="stage-node mono">SCORE</div>
+      <div class="stage-card" data-tilt>
+        <h3>Project Gangajal — LLM call scoring</h3>
+        <p>A production <strong>LLM-based counselor call scoring system</strong> (OpenAI, Python,
+          LangChain) hitting <strong class="hl-amber">96.5% accuracy</strong> with a
+          <strong class="hl-amber">50× jump</strong> in call-quality audit coverage — deployed on
+          <strong>AWS EC2</strong> via automated cron pipelines, with <strong>BigQuery</strong> as the data layer.</p>
+        <div class="tags mono"><span>OpenAI</span><span>LangChain</span><span>EC2 · cron</span><span>BigQuery</span></div>
+      </div>
+    </article>
+
+    <article class="stage reveal">
+      <div class="stage-node mono">TRANSLATE</div>
+      <div class="stage-card" data-tilt>
+        <h3>Multilingual coverage</h3>
+        <p>Extended the pipeline with <strong>LLM translation of regional transcripts</strong> —
+          Hindi, Tamil, Telugu, Marathi — wrapped in retry and fault-tolerance logic, pushing
+          analysis to <strong class="hl-amber">100% of counselling calls</strong>.</p>
+        <div class="tags mono"><span>GPT-4.1</span><span>4 languages</span><span>fault-tolerant</span></div>
+      </div>
+    </article>
+
+    <article class="stage reveal">
+      <div class="stage-node mono">DETECT</div>
+      <div class="stage-card" data-tilt>
+        <h3>Early warning system — WhatsApp</h3>
+        <p>LLM analysis over <strong>student WhatsApp conversations</strong> that flags drop-off
+          risk and dissatisfaction <em>before</em> they become churn — so counselors step in
+          while it still matters.</p>
+        <div class="tags mono"><span>LLM analysis</span><span>risk signals</span><span>proactive ops</span></div>
+      </div>
+    </article>
+
+    <article class="stage reveal">
+      <div class="stage-node mono">SERVE</div>
+      <div class="stage-card" data-tilt>
+        <h3>Platform migration</h3>
+        <p>Moved the Gangajal analytics platform from <strong>Streamlit to Next.js + FastAPI</strong>
+          and its database from <strong>PostgreSQL to BigQuery</strong> — authoring optimized
+          <strong>multi-CTE SQL pipelines</strong> with window functions for the counselling funnel,
+          visa tracking, and lead attribution.</p>
+        <div class="tags mono"><span>Next.js</span><span>FastAPI</span><span>BigQuery</span><span>SQL · CTEs</span></div>
+      </div>
+    </article>
+
+    <article class="stage reveal">
+      <div class="stage-node mono">PREDICT</div>
+      <div class="stage-card" data-tilt>
+        <h3>Conversion prediction model</h3>
+        <p>A <strong>LightGBM model</strong> over profile, counselor-interaction and app-engagement
+          signals, with <strong>SHAP explainability</strong> — so high-intent students surface at the
+          top of every counselor's queue.</p>
+        <div class="tags mono"><span>LightGBM</span><span>SHAP</span><span>feature engineering</span></div>
+      </div>
+    </article>
+
+    <article class="stage reveal">
+      <div class="stage-node mono">INDEX</div>
+      <div class="stage-card" data-tilt>
+        <h3>University database — College Finder</h3>
+        <p>A <strong>hierarchical database of 1,000+ institutions and 100K+ courses</strong> powering
+          the College Finder product — built with <strong>Playwright</strong>-driven scraping automation.</p>
+        <div class="tags mono"><span>Playwright</span><span>1,000+ unis</span><span>100K+ courses</span></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section class="section" id="projects">
+  <div class="section-head reveal">
+    <span class="eyebrow mono">03 / LAB</span>
+    <h2>Selected projects</h2>
+  </div>
+
+  <div class="projects-grid">
+    <a class="project-card reveal" data-tilt href="https://drive.google.com/drive/u/1/folders/1RPSLO3YMUOiNuQHxU0BbGa5KI-SC9OOU" target="_blank" rel="noopener">
+      <div class="project-img"><img src="assets/sentiment-analysis.jpg" alt="" loading="lazy"></div>
+      <div class="project-body">
+        <span class="project-idx mono">P·01</span>
+        <h3>Sentiment Analysis × Metaheuristics</h3>
+        <p>BiLSTM + Conv1D + Attention over <strong>2M+ samples</strong>; hyperparameters tuned with
+          Genetic Algorithm &amp; Grey Wolf Optimization. <strong class="hl-amber">95%</strong> on Amazon
+          Fine Food Reviews, 85% on Sentiment140.</p>
+        <div class="tags mono"><span>TensorFlow</span><span>BiLSTM</span><span>GA · GWO</span></div>
+      </div>
+      <span class="project-arrow mono" aria-hidden="true">↗</span>
+    </a>
+
+    <a class="project-card reveal" data-tilt href="https://github.com/rmasss123/Human-Activity-Recognition-using-CNN" target="_blank" rel="noopener">
+      <div class="project-img"><img src="assets/activity-recognition.jpg" alt="" loading="lazy"></div>
+      <div class="project-body">
+        <span class="project-idx mono">P·02</span>
+        <h3>Human Activity Recognition</h3>
+        <p>Benchmarked <strong>5 CNN architectures</strong> — VGG, ResNet, GoogLeNet, DenseNet,
+          MobileNetV2 — with transfer learning and augmentation on <strong>12,000+ images</strong>,
+          15 activity classes.</p>
+        <div class="tags mono"><span>CNN</span><span>Transfer learning</span><span>Keras</span></div>
+      </div>
+      <span class="project-arrow mono" aria-hidden="true">↗</span>
+    </a>
+
+    <a class="project-card reveal" data-tilt href="https://www.kaggle.com/code/sngmtiwri/heart-disease-prediction" target="_blank" rel="noopener">
+      <div class="project-img"><img src="assets/heart-disease.jpg" alt="" loading="lazy"></div>
+      <div class="project-body">
+        <span class="project-idx mono">P·03</span>
+        <h3>Heart Disease Prediction</h3>
+        <p>Logistic regression over clinical features — age, BP, cholesterol, ECG — with full EDA,
+          evaluated on precision, recall, F1 and ROC-AUC.</p>
+        <div class="tags mono"><span>Scikit-learn</span><span>EDA</span><span>ROC-AUC</span></div>
+      </div>
+      <span class="project-arrow mono" aria-hidden="true">↗</span>
+    </a>
+  </div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<section class="section" id="skills">
+  <div class="section-head reveal">
+    <span class="eyebrow mono">04 / STACK</span>
+    <h2>Tools of the trade</h2>
+  </div>
+
+  <div class="skills-rows">
+    <div class="skill-row reveal">
+      <span class="skill-cat mono">AI · ML · LLMS</span>
+      <div class="chips"><span class="chip chip-amber">LLMs (GPT-4.1)</span><span class="chip chip-amber">LangChain</span><span class="chip chip-amber">Prompt Engineering</span><span class="chip chip-amber">LightGBM</span><span class="chip chip-amber">TensorFlow · Keras</span><span class="chip chip-amber">Scikit-learn</span><span class="chip chip-amber">SHAP</span><span class="chip chip-amber">NLP</span></div>
+    </div>
+    <div class="skill-row reveal">
+      <span class="skill-cat mono">DATA · CLOUD</span>
+      <div class="chips"><span class="chip chip-cyan">BigQuery</span><span class="chip chip-cyan">PostgreSQL</span><span class="chip chip-cyan">AWS EC2</span><span class="chip chip-cyan">FastAPI</span><span class="chip chip-cyan">Next.js</span><span class="chip chip-cyan">Playwright</span><span class="chip chip-cyan">Streamlit</span><span class="chip chip-cyan">Cron</span></div>
+    </div>
+    <div class="skill-row reveal">
+      <span class="skill-cat mono">LANGUAGES</span>
+      <div class="chips"><span class="chip">Python</span><span class="chip">SQL</span><span class="chip">C++</span><span class="chip">R</span><span class="chip">MATLAB</span></div>
+    </div>
+    <div class="skill-row reveal">
+      <span class="skill-cat mono">FOUNDATIONS</span>
+      <div class="chips"><span class="chip">DSA</span><span class="chip">DBMS</span><span class="chip">OOP</span><span class="chip">Probability &amp; Stats</span><span class="chip">Linear Algebra</span><span class="chip">System Design</span><span class="chip">Operating Systems</span></div>
+    </div>
+  </div>
+
+  <div class="log reveal">
+    <span class="eyebrow mono">RUN LOG — education &amp; honors</span>
+    <ul class="log-list mono">
+      <li><span class="log-t">[2026]</span> B.Tech, Mathematics &amp; Data Science — NIT Bhopal · <span class="hl-amber">CGPA 8.71</span></li>
+      <li><span class="log-t">[2025]</span> <span class="hl-amber">AIR 6</span> — IIM Sambalpur Ops'timato Case Study · top 6 / 769 teams</li>
+      <li><span class="log-t">[2024]</span> National Round — Smart India Hackathon (SIH)</li>
+      <li><span class="log-t">[2024]</span> Top 10 — Saheogi B-Plan, IIM Ahmedabad · 838 teams</li>
+      <li><span class="log-t">[2024]</span> Hospitality Lead, E-Cell MANIT — led Central India's largest hackathon · 2,117+ participants</li>
+      <li><span class="log-t">[2019]</span> PRMO qualified — Mathematics Olympiad, Class 10</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="section contact" id="contact">
+  <div class="section-head reveal">
+    <span class="eyebrow mono">05 / HANDSHAKE</span>
+    <h2>Let's build something<br>that <span class="hl-amber">listens</span>.</h2>
+  </div>
+
+  <div class="contact-row reveal">
+    <a class="contact-mail mono" href="mailto:sangam.nitb@gmail.com" data-magnetic>sangam.nitb@gmail.com</a>
+    <div class="contact-links">
+      <a class="btn btn-ghost" href="https://github.com/rmasss123" target="_blank" rel="noopener" data-magnetic>GitHub ↗</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/sangam-tiwari-a2k/" target="_blank" rel="noopener" data-magnetic>LinkedIn ↗</a>
+      <a class="btn btn-amber" href="assets/Sangam_Tiwari_Resume.pdf" target="_blank" rel="noopener" data-magnetic>Resume ↗</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer mono">
+  <span>© 2026 Sangam Tiwari</span>
+  <span class="footer-mid">designed as a night-shift data console</span>
+  <span>BLR · IST <span id="ist-clock-2">--:--</span></span>
+</footer>
+
+<script src="js/main.js"></script>
 </body>
-</html> 
+</html>
