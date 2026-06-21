@@ -1,40 +1,15 @@
 /* =====================================================
-   SANGAM TIWARI — Neural Interface v4.0
-   Three.js · GSAP · Lenis · Holographic · Scramble
+   SANGAM TIWARI — Neural Interface v5.0
+   Pure vanilla JS — no CDN dependencies
    ===================================================== */
 (() => {
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const fine    = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
 
   /* =====================================================
-     LENIS SMOOTH SCROLL
-     ===================================================== */
-  let lenis = null;
-  if (window.Lenis && !reduced) {
-    lenis = new Lenis({
-      duration: 1.2,
-      easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothTouch: false,
-    });
-    /* driven exclusively by gsap.ticker below — no separate raf loop */
-  }
-
-  /* =====================================================
-     GSAP + SCROLLTRIGGER SETUP
-     ===================================================== */
-  if (window.gsap && window.ScrollTrigger) {
-    gsap.registerPlugin(ScrollTrigger);
-    if (lenis) {
-      lenis.on('scroll', ScrollTrigger.update);
-      gsap.ticker.add(time => lenis.raf(time * 1000));
-      gsap.ticker.lagSmoothing(0);
-    }
-  }
-
-  /* =====================================================
      TEXT SCRAMBLE
      ===================================================== */
-  const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZアイウエオカキクケコ#$%@&!?><-_';
+  const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZアイウエオ#$%@&!?><-_';
   function scrambleTo(el, text, duration, onDone) {
     if (!el) return;
     let startTs = null;
@@ -61,8 +36,8 @@
       if (w2) w2.textContent = 'TIWARI';
       return;
     }
-    scrambleTo(w1, 'SANGAM', 1300, () => {
-      setTimeout(() => scrambleTo(w2, 'TIWARI', 1100), 100);
+    scrambleTo(w1, 'SANGAM', 1200, () => {
+      setTimeout(() => scrambleTo(w2, 'TIWARI', 1000), 100);
     });
   }
 
@@ -70,159 +45,162 @@
      LOADER SEQUENCE
      ===================================================== */
   const loader = document.getElementById('loader');
-  const ldrLog = document.getElementById('ldr-log');
-  const ldrBar = document.getElementById('ldr-bar');
-  const ldrPct = document.getElementById('ldr-pct');
-
   function runLoader() {
-    if (!loader) { startHeroScramble(); return; }
+    if (!loader || reduced) { startHeroScramble(); return; }
+
+    const ldrLog = document.getElementById('ldr-log');
+    const ldrBar = document.getElementById('ldr-bar');
+    const ldrPct = document.getElementById('ldr-pct');
 
     const steps = [
       { text: '▸ loading language model weights...', pct: 22 },
-      { text: '▸ connecting to BigQuery pipeline...', pct: 44 },
-      { text: '▸ initializing neural renderer...', pct: 66 },
-      { text: '▸ calibrating particle dynamics...', pct: 88 },
-      { text: '▸ all systems nominal.', pct: 100 },
+      { text: '▸ connecting to BigQuery pipeline...',  pct: 44 },
+      { text: '▸ initializing neural renderer...',     pct: 66 },
+      { text: '▸ calibrating particle dynamics...',    pct: 88 },
+      { text: '▸ all systems nominal.',                pct: 100 },
     ];
 
     steps.forEach(({ text, pct }, i) => {
       setTimeout(() => {
-        const line = document.createElement('div');
-        line.className = 'ldr-line';
-        line.textContent = text;
-        if (ldrLog) ldrLog.appendChild(line);
+        if (ldrLog) {
+          const line = document.createElement('div');
+          line.className = 'ldr-line';
+          line.textContent = text;
+          ldrLog.appendChild(line);
+        }
         if (ldrBar) ldrBar.style.width = pct + '%';
         if (ldrPct) ldrPct.textContent = pct + '%';
         if (pct === 100) {
           const ready = document.getElementById('ldr-ready');
           if (ready) ready.style.opacity = '1';
         }
-      }, 380 * (i + 1));
+      }, 340 * (i + 1));
     });
 
+    const totalDelay = 340 * steps.length + 480;
     setTimeout(() => {
-      if (loader) loader.classList.add('ldr-out');
+      loader.classList.add('ldr-out');
       setTimeout(() => {
-        if (loader) loader.style.display = 'none';
+        loader.style.display = 'none';
         startHeroScramble();
-      }, 700);
-    }, 380 * steps.length + 520);
+      }, 650);
+    }, totalDelay);
   }
 
   runLoader();
 
   /* =====================================================
-     THREE.JS 3D NEURAL NETWORK (fixed full-viewport bg)
+     2D CANVAS NEURAL NETWORK BACKGROUND
      ===================================================== */
-  function initThree() {
-    const canvas = document.getElementById('three-canvas');
-    if (!canvas || !window.THREE) return;
+  const neuralCanvas = document.getElementById('neural-bg');
+  if (neuralCanvas && !reduced) {
+    const ctx  = neuralCanvas.getContext('2d');
+    const DPR  = Math.min(devicePixelRatio, 2);
+    let W, H, nodes = [], edges = [], pulses = [];
 
-    const { Scene, PerspectiveCamera, WebGLRenderer, BufferGeometry,
-            BufferAttribute, Points, PointsMaterial,
-            LineSegments, LineBasicMaterial, Group } = THREE;
+    const LAYERS    = [5, 8, 10, 10, 8, 4];
+    const LAYER_COL = ['#5EE7FF','#8b5cf6','#8b5cf6','#8b5cf6','#8b5cf6','#FFB454'];
 
-    const renderer = new WebGLRenderer({ canvas, alpha: true, antialias: false });
-    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-    renderer.setSize(innerWidth, innerHeight);
-    renderer.setClearColor(0x000000, 0);
+    function build() {
+      nodes = []; edges = []; pulses = [];
+      const hero = neuralCanvas.closest('.hero') || neuralCanvas.parentElement;
+      W = neuralCanvas.width  = hero.offsetWidth  * DPR;
+      H = neuralCanvas.height = hero.offsetHeight * DPR;
+      neuralCanvas.style.width  = hero.offsetWidth  + 'px';
+      neuralCanvas.style.height = hero.offsetHeight + 'px';
 
-    const scene = new Scene();
-    const camera = new PerspectiveCamera(55, innerWidth / innerHeight, 1, 2000);
-    camera.position.z = 620;
+      const L      = LAYERS.length;
+      const xStart = W * 0.04, xEnd = W * 0.96;
+      const xStep  = (xEnd - xStart) / (L - 1);
 
-    const group = new Group();
-    scene.add(group);
-
-    /* Layered neural-net node positions */
-    const LAYERS  = [12, 20, 28, 20, 12];  /* 92 nodes — lighter on GPU */
-    const N       = LAYERS.reduce((a, b) => a + b, 0);
-    const LAYER_X = [-310, -155, 0, 155, 310];
-    const LAYER_RGB = [
-      [0.37, 0.91, 1.00],  // cyan  — input
-      [0.56, 0.52, 0.98],  // violet-blue
-      [0.55, 0.36, 0.96],  // purple — hidden
-      [0.56, 0.52, 0.98],  // violet-blue
-      [1.00, 0.71, 0.33],  // amber  — output
-    ];
-
-    const nodePos  = new Float32Array(N * 3);
-    const nodeCols = new Float32Array(N * 3);
-    let ni = 0;
-    LAYERS.forEach((cnt, li) => {
-      for (let k = 0; k < cnt; k++) {
-        nodePos[ni * 3]     = LAYER_X[li] + (Math.random() - 0.5) * 70;
-        nodePos[ni * 3 + 1] = (Math.random() - 0.5) * 520;
-        nodePos[ni * 3 + 2] = (Math.random() - 0.5) * 180;
-        const [r, g, b] = LAYER_RGB[li];
-        nodeCols[ni * 3]     = r + (Math.random() - 0.5) * 0.12;
-        nodeCols[ni * 3 + 1] = g + (Math.random() - 0.5) * 0.12;
-        nodeCols[ni * 3 + 2] = b + (Math.random() - 0.5) * 0.12;
-        ni++;
-      }
-    });
-
-    const nodeGeo = new BufferGeometry();
-    nodeGeo.setAttribute('position', new BufferAttribute(nodePos, 3));
-    nodeGeo.setAttribute('color',    new BufferAttribute(nodeCols, 3));
-    group.add(new Points(nodeGeo, new PointsMaterial({
-      size: 3.2, vertexColors: true, transparent: true, opacity: 0.72, sizeAttenuation: true,
-    })));
-
-    /* Sparse connections between adjacent layers */
-    const MAX_LINES = 2000;
-    const linePos   = new Float32Array(MAX_LINES * 6);
-    let lc = 0, cursor = 0;
-    LAYERS.forEach((cnt, li) => {
-      if (li === LAYERS.length - 1) { cursor += cnt; return; }
-      const fStart = cursor, fEnd = cursor + cnt;
-      const tStart = cursor + cnt, tEnd = tStart + LAYERS[li + 1];
-      for (let fi = fStart; fi < fEnd; fi++) {
-        let conn = 0;
-        for (let ti = tStart; ti < tEnd && conn < 4 && lc < MAX_LINES; ti++) {
-          if (Math.random() < 0.38) {
-            const idx = lc * 6;
-            linePos[idx]     = nodePos[fi * 3];     linePos[idx + 1] = nodePos[fi * 3 + 1]; linePos[idx + 2] = nodePos[fi * 3 + 2];
-            linePos[idx + 3] = nodePos[ti * 3];     linePos[idx + 4] = nodePos[ti * 3 + 1]; linePos[idx + 5] = nodePos[ti * 3 + 2];
-            lc++; conn++;
-          }
+      LAYERS.forEach((cnt, li) => {
+        const x    = xStart + xStep * li;
+        const yGap = H / (cnt + 1);
+        for (let ni = 0; ni < cnt; ni++) {
+          nodes.push({ x, y: yGap * (ni + 1), layer: li, color: LAYER_COL[li], r: 2.8 * DPR, glow: 0 });
         }
+      });
+
+      for (let li = 0; li < L - 1; li++) {
+        const from = nodes.filter(n => n.layer === li);
+        const to   = nodes.filter(n => n.layer === li + 1);
+        from.forEach(f => to.forEach(t => {
+          if (Math.random() < 0.5) edges.push({ from: f, to: t });
+        }));
       }
-      cursor += cnt;
-    });
+    }
 
-    const lineGeo = new BufferGeometry();
-    lineGeo.setAttribute('position', new BufferAttribute(linePos, 3));
-    lineGeo.setDrawRange(0, lc * 2);
-    group.add(new LineSegments(lineGeo, new LineBasicMaterial({ color: 0x5EE7FF, transparent: true, opacity: 0.09 })));
+    function spawnPulse() {
+      const inputs = nodes.filter(n => n.layer === 0);
+      const start  = inputs[Math.floor(Math.random() * inputs.length)];
+      edges.filter(e => e.from === start && Math.random() < 0.65).forEach(e =>
+        pulses.push({ edge: e, t: 0, speed: 0.004 + Math.random() * 0.005 }));
+    }
 
-    /* Mouse parallax */
-    let mx = 0, my = 0, camX = 0, camY = 0;
-    document.addEventListener('mousemove', e => {
-      mx = (e.clientX / innerWidth  - 0.5) * 2;
-      my = (e.clientY / innerHeight - 0.5) * 2;
-    });
+    function propagate(node) {
+      node.glow = 1;
+      if (node.layer >= LAYERS.length - 1) return;
+      edges.filter(e => e.from === node && Math.random() < 0.55).slice(0, 5).forEach(e =>
+        setTimeout(() => pulses.push({ edge: e, t: 0, speed: 0.004 + Math.random() * 0.005 }), 40));
+    }
 
-    (function tick() {
-      group.rotation.y += 0.00045;
-      group.rotation.x += 0.00018;
-      camX += (mx * 45 - camX) * 0.028;
-      camY += (-my * 28 - camY) * 0.028;
-      camera.position.x = camX;
-      camera.position.y = camY;
-      camera.lookAt(0, 0, 0);
-      renderer.render(scene, camera);
-      requestAnimationFrame(tick);
-    })();
+    let lastSpawn = 0;
+    function draw(ts) {
+      ctx.clearRect(0, 0, W, H);
 
-    addEventListener('resize', () => {
-      camera.aspect = innerWidth / innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(innerWidth, innerHeight);
-    });
+      edges.forEach(e => {
+        const g = ctx.createLinearGradient(e.from.x, e.from.y, e.to.x, e.to.y);
+        g.addColorStop(0, e.from.color + '22');
+        g.addColorStop(1, e.to.color   + '15');
+        ctx.beginPath();
+        ctx.moveTo(e.from.x, e.from.y);
+        ctx.lineTo(e.to.x,   e.to.y);
+        ctx.strokeStyle = g;
+        ctx.lineWidth = 0.8 * DPR;
+        ctx.stroke();
+      });
+
+      pulses = pulses.filter(p => {
+        p.t += p.speed;
+        if (p.t >= 1) { propagate(p.edge.to); return false; }
+        const x   = p.edge.from.x + (p.edge.to.x - p.edge.from.x) * p.t;
+        const y   = p.edge.from.y + (p.edge.to.y - p.edge.from.y) * p.t;
+        const col = p.edge.from.color;
+        const grd = ctx.createRadialGradient(x, y, 0, x, y, 9 * DPR);
+        grd.addColorStop(0, col + '88');
+        grd.addColorStop(1, col + '00');
+        ctx.beginPath(); ctx.arc(x, y, 9 * DPR, 0, Math.PI * 2);
+        ctx.fillStyle = grd; ctx.fill();
+        ctx.beginPath(); ctx.arc(x, y, 2 * DPR, 0, Math.PI * 2);
+        ctx.fillStyle = col; ctx.globalAlpha = 0.9; ctx.fill(); ctx.globalAlpha = 1;
+        return true;
+      });
+
+      nodes.forEach(n => {
+        n.glow = Math.max(0, n.glow - 0.022);
+        if (n.glow > 0.04) {
+          const halo = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 18 * DPR);
+          halo.addColorStop(0, n.color + Math.round(n.glow * 110).toString(16).padStart(2, '0'));
+          halo.addColorStop(1, n.color + '00');
+          ctx.beginPath(); ctx.arc(n.x, n.y, 18 * DPR, 0, Math.PI * 2);
+          ctx.fillStyle = halo; ctx.fill();
+        }
+        ctx.beginPath(); ctx.arc(n.x, n.y, n.r + 2.5 * DPR, 0, Math.PI * 2);
+        ctx.strokeStyle = n.color; ctx.lineWidth = 0.7 * DPR;
+        ctx.globalAlpha = 0.18 + n.glow * 0.5; ctx.stroke();
+        ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+        ctx.fillStyle = n.color; ctx.globalAlpha = 0.32 + n.glow * 0.68; ctx.fill();
+        ctx.globalAlpha = 1;
+      });
+
+      if (ts - lastSpawn > 900) { spawnPulse(); lastSpawn = ts; }
+      requestAnimationFrame(draw);
+    }
+
+    build();
+    addEventListener('resize', () => { build(); });
+    requestAnimationFrame(draw);
   }
-
-  initThree();
 
   /* =====================================================
      IST CLOCK
@@ -234,8 +212,7 @@
     if (clock1) clock1.textContent = t + ' IST';
     if (clock2) clock2.textContent = t;
   };
-  tickClock();
-  setInterval(tickClock, 1000);
+  tickClock(); setInterval(tickClock, 1000);
 
   /* =====================================================
      SCROLL PROGRESS BAR
@@ -259,8 +236,7 @@
     addEventListener('mousemove', e => { curMx = e.clientX; curMy = e.clientY; });
 
     (function cursorLoop() {
-      rx += (curMx - rx) * 0.16;
-      ry += (curMy - ry) * 0.16;
+      rx += (curMx - rx) * 0.16; ry += (curMy - ry) * 0.16;
       if (curDot)  curDot.style.transform  = `translate(${curMx}px,${curMy}px) translate(-50%,-50%)`;
       if (curRing) curRing.style.transform = `translate(${rx}px,${ry}px) translate(-50%,-50%)`;
       requestAnimationFrame(cursorLoop);
@@ -272,12 +248,12 @@
     });
 
     /* snake particle trail */
-    const TRAIL_N = 10;
+    const TRAIL_N = 8;
     const trails  = Array.from({ length: TRAIL_N }, (_, i) => {
       const el = document.createElement('div');
       el.className = 'trail-dot';
-      const sz = 3.8 - i * 0.28;
-      el.style.cssText = `width:${sz}px;height:${sz}px;opacity:${((1 - i / TRAIL_N) * 0.7).toFixed(2)}`;
+      const sz = 3.5 - i * 0.3;
+      el.style.cssText = `width:${sz}px;height:${sz}px;opacity:${((1 - i / TRAIL_N) * 0.65).toFixed(2)}`;
       document.body.appendChild(el);
       return { el, x: curMx, y: curMy };
     });
@@ -285,8 +261,7 @@
     (function trailLoop() {
       let px = curMx, py = curMy;
       trails.forEach(t => {
-        t.x += (px - t.x) * 0.38;
-        t.y += (py - t.y) * 0.38;
+        t.x += (px - t.x) * 0.4; t.y += (py - t.y) * 0.4;
         t.el.style.transform = `translate(${t.x}px,${t.y}px) translate(-50%,-50%)`;
         px = t.x; py = t.y;
       });
@@ -361,49 +336,14 @@
   }
 
   /* =====================================================
-     GSAP SCROLL ANIMATIONS
+     SCROLL REVEAL (IntersectionObserver — no library needed)
      ===================================================== */
-  if (window.gsap && window.ScrollTrigger && !reduced) {
-    const ease = 'power3.out';
-    /* fromTo explicitly sets the end state to visible — fixes gsap.from() reading
-       opacity:0 from .reveal CSS and treating it as the animation target */
-    const ft = (targets, from, to) => gsap.fromTo(targets, from, to);
-
-    document.querySelectorAll('.section-head').forEach(el =>
-      ft(el, { opacity: 0, y: 55 }, { opacity: 1, y: 0, duration: 0.9, ease, scrollTrigger: { trigger: el, start: 'top 84%' } }));
-
-    const aboutSection = document.getElementById('about');
-    if (aboutSection) {
-      ft('.about-photo', { opacity: 0, x: -70 }, { opacity: 1, x: 0, duration: 1.0, ease, scrollTrigger: { trigger: aboutSection, start: 'top 76%' } });
-      ft('.about-copy',  { opacity: 0, x:  70 }, { opacity: 1, x: 0, duration: 1.0, delay: 0.15, ease, scrollTrigger: { trigger: aboutSection, start: 'top 76%' } });
-    }
-
-    const statsEl = document.querySelector('.stats');
-    if (statsEl)
-      ft('.stat', { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.6, stagger: 0.1, ease, scrollTrigger: { trigger: statsEl, start: 'top 88%' } });
-
-    document.querySelectorAll('.stage').forEach((stage, i) =>
-      ft(stage, { opacity: 0, x: -55 }, { opacity: 1, x: 0, duration: 0.8, delay: i * 0.04, ease, scrollTrigger: { trigger: stage, start: 'top 88%' } }));
-
-    const pgrid = document.querySelector('.projects-grid');
-    if (pgrid)
-      ft('.project-card', { opacity: 0, y: 80 }, { opacity: 1, y: 0, duration: 0.75, stagger: 0.1, ease, scrollTrigger: { trigger: pgrid, start: 'top 82%' } });
-
-    document.querySelectorAll('.skill-row').forEach((row, i) =>
-      ft(row, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.7, delay: i * 0.08, ease, scrollTrigger: { trigger: row, start: 'top 88%' } }));
-
-    ['.log', '.contact-row'].forEach(sel => {
-      const el = document.querySelector(sel);
-      if (el) ft(el, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, ease, scrollTrigger: { trigger: el, start: 'top 88%' } });
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
     });
-
-  } else {
-    /* Fallback for reduced-motion or CDN failure */
-    document.querySelectorAll('.reveal').forEach(el => {
-      el.style.opacity = '1';
-      el.style.transform = 'none';
-    });
-  }
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
   /* =====================================================
      COUNT-UP STATS
@@ -411,8 +351,7 @@
   const statIO = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
-      const el = entry.target;
-      statIO.unobserve(el);
+      const el = entry.target; statIO.unobserve(el);
       const target   = parseFloat(el.dataset.count);
       const suffix   = el.dataset.suffix || '';
       const decimals = parseInt(el.dataset.decimals || (Number.isInteger(target) ? 0 : 1));
