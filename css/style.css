@@ -128,34 +128,9 @@ strong{font-weight:500;color:var(--text)}
   isolation:isolate;
 }
 
-/* blob hero bg */
+/* neural network hero bg */
 .hero-bg{position:absolute;inset:0;overflow:hidden;z-index:-1}
-.blob{
-  position:absolute;border-radius:50%;
-  filter:blur(110px);opacity:.18;
-  animation:blob-drift 18s ease-in-out infinite alternate;
-}
-.blob-1{
-  width:640px;height:560px;background:#5EE7FF;
-  top:-180px;left:-160px;
-  animation-duration:22s;
-}
-.blob-2{
-  width:580px;height:500px;background:#FFB454;
-  bottom:-140px;right:-100px;
-  animation-duration:26s;animation-delay:-8s;
-}
-.blob-3{
-  width:460px;height:420px;background:#8b5cf6;
-  top:35%;left:40%;
-  animation-duration:30s;animation-delay:-14s;
-}
-@keyframes blob-drift{
-  0%{transform:translate(0,0) scale(1)}
-  33%{transform:translate(40px,-30px) scale(1.06)}
-  66%{transform:translate(-20px,50px) scale(.95)}
-  100%{transform:translate(30px,20px) scale(1.04)}
-}
+#neural-bg{position:absolute;inset:0;width:100%;height:100%;opacity:.8}
 
 .chip-layer{position:absolute;inset:0;overflow:hidden;z-index:1;pointer-events:none}
 .insight-chip{

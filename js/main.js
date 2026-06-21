@@ -83,64 +83,136 @@
     }
   }
 
-  /* ---------- waveform canvas ---------- */
-  const canvas = document.getElementById('wave');
-  if (canvas) {
-    const ctx = canvas.getContext('2d');
-    let W, H, t = 0;
-    let mouseX = -9999, mouseY = 0;
+  /* ---------- neural network background ---------- */
+  const neuralCanvas = document.getElementById('neural-bg');
+  if (neuralCanvas) {
+    const ctx = neuralCanvas.getContext('2d');
+    const DPR = Math.min(devicePixelRatio, 2);
+    let W, H, nodes = [], edges = [], pulses = [];
+    // layer colours: input=cyan  hidden=violet  output=amber
+    const LAYER_COLOR = ['#5EE7FF', '#8b5cf6', '#8b5cf6', '#8b5cf6', '#8b5cf6', '#FFB454'];
+    const LAYER_COUNTS = [5, 8, 10, 10, 8, 4];
 
-    const resize = () => {
-      const r = canvas.parentElement.getBoundingClientRect();
-      W = canvas.width = r.width * devicePixelRatio;
-      H = canvas.height = r.height * devicePixelRatio;
-      canvas.style.width = r.width + 'px';
-      canvas.style.height = r.height + 'px';
-    };
-    resize();
-    addEventListener('resize', resize);
-
-    canvas.parentElement.addEventListener('mousemove', e => {
-      const r = canvas.getBoundingClientRect();
-      mouseX = (e.clientX - r.left) * devicePixelRatio;
-      mouseY = (e.clientY - r.top) * devicePixelRatio;
-    });
-    canvas.parentElement.addEventListener('mouseleave', () => { mouseX = -9999; });
-
-    const lines = [
-      { yPct: 0.80, amp: 26, freq: 0.0042, speed: 0.018, color: 'rgba(94,231,255,0.55)', width: 1.4 },
-      { yPct: 0.84, amp: 40, freq: 0.0030, speed: 0.012, color: 'rgba(94,231,255,0.22)', width: 1.0 },
-      { yPct: 0.87, amp: 18, freq: 0.0058, speed: 0.026, color: 'rgba(255,180,84,0.5)', width: 1.3 },
-      { yPct: 0.91, amp: 30, freq: 0.0024, speed: 0.009, color: 'rgba(255,180,84,0.18)', width: 1.0 },
-    ];
-
-    const draw = () => {
-      ctx.clearRect(0, 0, W, H);
-      const dpr = devicePixelRatio;
-      lines.forEach(L => {
-        ctx.beginPath();
-        const baseY = H * L.yPct;
-        for (let x = 0; x <= W; x += 4 * dpr) {
-          // mouse adds a local gaussian bump
-          const d = (x - mouseX) / (140 * dpr);
-          const bump = Math.exp(-d * d) * 60 * dpr * (mouseY < H ? 1 : 0);
-          const y = baseY
-            + Math.sin(x * L.freq + t * L.speed * 60) * L.amp * dpr
-            + Math.sin(x * L.freq * 2.7 + t * L.speed * 90) * L.amp * 0.3 * dpr
-            - bump;
-          x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    function buildNetwork() {
+      nodes = []; edges = []; pulses = [];
+      const L = LAYER_COUNTS.length;
+      const xStart = W * 0.05, xEnd = W * 0.95;
+      const xStep = (xEnd - xStart) / (L - 1);
+      LAYER_COUNTS.forEach((count, li) => {
+        const x = xStart + xStep * li;
+        const yGap = H / (count + 1);
+        for (let ni = 0; ni < count; ni++) {
+          nodes.push({ x, y: yGap * (ni + 1), layer: li, color: LAYER_COLOR[li], r: 3 * DPR, glow: 0 });
         }
-        ctx.strokeStyle = L.color;
-        ctx.lineWidth = L.width * dpr;
+      });
+      // sparse connections between adjacent layers
+      for (let li = 0; li < L - 1; li++) {
+        const from = nodes.filter(n => n.layer === li);
+        const to   = nodes.filter(n => n.layer === li + 1);
+        from.forEach(f => {
+          to.forEach(t => {
+            if (Math.random() < 0.55) {
+              edges.push({ from: f, to: t, alpha: 0.07 + Math.random() * 0.13 });
+            }
+          });
+        });
+      }
+    }
+
+    function resize() {
+      const hero = neuralCanvas.closest('.hero');
+      W = neuralCanvas.width  = hero.offsetWidth  * DPR;
+      H = neuralCanvas.height = hero.offsetHeight * DPR;
+      neuralCanvas.style.width  = hero.offsetWidth  + 'px';
+      neuralCanvas.style.height = hero.offsetHeight + 'px';
+      buildNetwork();
+    }
+
+    function spawnPulse() {
+      const inputs = nodes.filter(n => n.layer === 0);
+      const start  = inputs[Math.floor(Math.random() * inputs.length)];
+      edges.filter(e => e.from === start && Math.random() < 0.7).forEach(e => {
+        pulses.push({ edge: e, t: 0, speed: 0.0035 + Math.random() * 0.005 });
+      });
+    }
+
+    function propagate(node) {
+      node.glow = 1;
+      const next = edges.filter(e => e.from === node);
+      if (!next.length) return;
+      next.filter(() => Math.random() < 0.55).slice(0, 5).forEach(e => {
+        setTimeout(() => pulses.push({ edge: e, t: 0, speed: 0.0035 + Math.random() * 0.005 }), 30 + Math.random() * 80);
+      });
+    }
+
+    let lastSpawn = 0;
+    function draw(ts) {
+      ctx.clearRect(0, 0, W, H);
+
+      // edges
+      edges.forEach(e => {
+        const g = ctx.createLinearGradient(e.from.x, e.from.y, e.to.x, e.to.y);
+        g.addColorStop(0, e.from.color + '28');
+        g.addColorStop(1, e.to.color   + '18');
+        ctx.beginPath();
+        ctx.moveTo(e.from.x, e.from.y);
+        ctx.lineTo(e.to.x,   e.to.y);
+        ctx.strokeStyle = g;
+        ctx.lineWidth = 0.9 * DPR;
         ctx.stroke();
       });
-      t += 1;
-    };
 
-    if (reduced) { draw(); }
-    else {
-      (function animate() { draw(); requestAnimationFrame(animate); })();
+      // pulses
+      pulses = pulses.filter(p => {
+        p.t += p.speed;
+        if (p.t >= 1) { propagate(p.edge.to); return false; }
+        const x = p.edge.from.x + (p.edge.to.x - p.edge.from.x) * p.t;
+        const y = p.edge.from.y + (p.edge.to.y - p.edge.from.y) * p.t;
+        const col = p.edge.from.color;
+        // glow halo
+        const grd = ctx.createRadialGradient(x, y, 0, x, y, 10 * DPR);
+        grd.addColorStop(0, col + '77');
+        grd.addColorStop(1, col + '00');
+        ctx.beginPath(); ctx.arc(x, y, 10 * DPR, 0, Math.PI * 2);
+        ctx.fillStyle = grd; ctx.fill();
+        // core dot
+        ctx.beginPath(); ctx.arc(x, y, 2.2 * DPR, 0, Math.PI * 2);
+        ctx.fillStyle = col; ctx.globalAlpha = 0.95; ctx.fill(); ctx.globalAlpha = 1;
+        return true;
+      });
+
+      // nodes
+      nodes.forEach(n => {
+        n.glow = Math.max(0, n.glow - 0.022);
+        if (n.glow > 0.04) {
+          const halo = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 20 * DPR);
+          halo.addColorStop(0, n.color + Math.round(n.glow * 110).toString(16).padStart(2, '0'));
+          halo.addColorStop(1, n.color + '00');
+          ctx.beginPath(); ctx.arc(n.x, n.y, 20 * DPR, 0, Math.PI * 2);
+          ctx.fillStyle = halo; ctx.fill();
+        }
+        // outer ring
+        ctx.beginPath(); ctx.arc(n.x, n.y, n.r + 3.5 * DPR, 0, Math.PI * 2);
+        ctx.strokeStyle = n.color;
+        ctx.lineWidth   = 0.75 * DPR;
+        ctx.globalAlpha = 0.15 + n.glow * 0.55;
+        ctx.stroke();
+        // fill
+        ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+        ctx.fillStyle   = n.color;
+        ctx.globalAlpha = 0.3 + n.glow * 0.7;
+        ctx.fill();
+        ctx.globalAlpha = 1;
+      });
+
+      if (ts - lastSpawn > 800) { spawnPulse(); lastSpawn = ts; }
+      requestAnimationFrame(draw);
     }
+
+    resize();
+    addEventListener('resize', () => resize());
+    if (!reduced) requestAnimationFrame(draw);
+    else buildNetwork(); // draw static snapshot for reduced-motion
   }
 
   /* ---------- insight chips popping off the wave ---------- */
