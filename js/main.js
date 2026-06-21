@@ -16,10 +16,7 @@
       easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothTouch: false,
     });
-    (function rafLoop(time) {
-      lenis.raf(time);
-      requestAnimationFrame(rafLoop);
-    })(0);
+    /* driven exclusively by gsap.ticker below — no separate raf loop */
   }
 
   /* =====================================================
@@ -138,7 +135,7 @@
     scene.add(group);
 
     /* Layered neural-net node positions */
-    const LAYERS  = [20, 35, 45, 35, 25];
+    const LAYERS  = [12, 20, 28, 20, 12];  /* 92 nodes — lighter on GPU */
     const N       = LAYERS.reduce((a, b) => a + b, 0);
     const LAYER_X = [-310, -155, 0, 155, 310];
     const LAYER_RGB = [
@@ -173,7 +170,7 @@
     })));
 
     /* Sparse connections between adjacent layers */
-    const MAX_LINES = 5000;
+    const MAX_LINES = 2000;
     const linePos   = new Float32Array(MAX_LINES * 6);
     let lc = 0, cursor = 0;
     LAYERS.forEach((cnt, li) => {
@@ -368,40 +365,44 @@
      ===================================================== */
   if (window.gsap && window.ScrollTrigger && !reduced) {
     const ease = 'power3.out';
+    /* fromTo explicitly sets the end state to visible — fixes gsap.from() reading
+       opacity:0 from .reveal CSS and treating it as the animation target */
+    const ft = (targets, from, to) => gsap.fromTo(targets, from, to);
 
     document.querySelectorAll('.section-head').forEach(el =>
-      gsap.from(el, { scrollTrigger: { trigger: el, start: 'top 84%' }, y: 55, opacity: 0, duration: 0.9, ease }));
+      ft(el, { opacity: 0, y: 55 }, { opacity: 1, y: 0, duration: 0.9, ease, scrollTrigger: { trigger: el, start: 'top 84%' } }));
 
     const aboutSection = document.getElementById('about');
     if (aboutSection) {
-      gsap.from('.about-photo', { scrollTrigger: { trigger: aboutSection, start: 'top 76%' }, x: -70, opacity: 0, duration: 1.0, ease });
-      gsap.from('.about-copy',  { scrollTrigger: { trigger: aboutSection, start: 'top 76%' }, x:  70, opacity: 0, duration: 1.0, delay: 0.15, ease });
+      ft('.about-photo', { opacity: 0, x: -70 }, { opacity: 1, x: 0, duration: 1.0, ease, scrollTrigger: { trigger: aboutSection, start: 'top 76%' } });
+      ft('.about-copy',  { opacity: 0, x:  70 }, { opacity: 1, x: 0, duration: 1.0, delay: 0.15, ease, scrollTrigger: { trigger: aboutSection, start: 'top 76%' } });
     }
 
     const statsEl = document.querySelector('.stats');
     if (statsEl)
-      gsap.from('.stat', { scrollTrigger: { trigger: statsEl, start: 'top 88%' }, scale: 0.8, opacity: 0, duration: 0.6, stagger: 0.1, ease });
+      ft('.stat', { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.6, stagger: 0.1, ease, scrollTrigger: { trigger: statsEl, start: 'top 88%' } });
 
     document.querySelectorAll('.stage').forEach((stage, i) =>
-      gsap.from(stage, { scrollTrigger: { trigger: stage, start: 'top 88%' }, x: -55, opacity: 0, duration: 0.8, delay: i * 0.04, ease }));
+      ft(stage, { opacity: 0, x: -55 }, { opacity: 1, x: 0, duration: 0.8, delay: i * 0.04, ease, scrollTrigger: { trigger: stage, start: 'top 88%' } }));
 
     const pgrid = document.querySelector('.projects-grid');
     if (pgrid)
-      gsap.from('.project-card', { scrollTrigger: { trigger: pgrid, start: 'top 82%' }, y: 80, opacity: 0, duration: 0.75, stagger: 0.1, ease });
+      ft('.project-card', { opacity: 0, y: 80 }, { opacity: 1, y: 0, duration: 0.75, stagger: 0.1, ease, scrollTrigger: { trigger: pgrid, start: 'top 82%' } });
 
     document.querySelectorAll('.skill-row').forEach((row, i) =>
-      gsap.from(row, { scrollTrigger: { trigger: row, start: 'top 88%' }, y: 40, opacity: 0, duration: 0.7, delay: i * 0.08, ease }));
+      ft(row, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.7, delay: i * 0.08, ease, scrollTrigger: { trigger: row, start: 'top 88%' } }));
 
     ['.log', '.contact-row'].forEach(sel => {
       const el = document.querySelector(sel);
-      if (el) gsap.from(el, { scrollTrigger: { trigger: el, start: 'top 88%' }, y: 40, opacity: 0, duration: 0.8, ease });
+      if (el) ft(el, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, ease, scrollTrigger: { trigger: el, start: 'top 88%' } });
     });
 
   } else {
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    /* Fallback for reduced-motion or CDN failure */
+    document.querySelectorAll('.reveal').forEach(el => {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    });
   }
 
   /* =====================================================
