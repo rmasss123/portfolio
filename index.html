@@ -39,7 +39,11 @@
 
 <!-- ============ HERO ============ -->
 <section class="hero">
-  <canvas id="wave" aria-hidden="true"></canvas>
+  <div class="hero-bg" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
   <div class="chip-layer" id="chip-layer" aria-hidden="true"></div>
 
   <div class="hero-inner">
@@ -201,48 +205,10 @@
   </div>
 
   <div class="projects-grid">
-    <a class="project-card reveal" data-tilt href="https://drive.google.com/drive/u/1/folders/1RPSLO3YMUOiNuQHxU0BbGa5KI-SC9OOU" target="_blank" rel="noopener">
-      <div class="project-img"><img src="assets/sentiment-analysis.jpg" alt="" loading="lazy"></div>
-      <div class="project-body">
-        <span class="project-idx mono">P·01</span>
-        <h3>Sentiment Analysis × Metaheuristics</h3>
-        <p>BiLSTM + Conv1D + Attention over <strong>2M+ samples</strong>; hyperparameters tuned with
-          Genetic Algorithm &amp; Grey Wolf Optimization. <strong class="hl-amber">95%</strong> on Amazon
-          Fine Food Reviews, 85% on Sentiment140.</p>
-        <div class="tags mono"><span>TensorFlow</span><span>BiLSTM</span><span>GA · GWO</span></div>
-      </div>
-      <span class="project-arrow mono" aria-hidden="true">↗</span>
-    </a>
-
-    <a class="project-card reveal" data-tilt href="https://github.com/rmasss123/Human-Activity-Recognition-using-CNN" target="_blank" rel="noopener">
-      <div class="project-img"><img src="assets/activity-recognition.jpg" alt="" loading="lazy"></div>
-      <div class="project-body">
-        <span class="project-idx mono">P·02</span>
-        <h3>Human Activity Recognition</h3>
-        <p>Benchmarked <strong>5 CNN architectures</strong> — VGG, ResNet, GoogLeNet, DenseNet,
-          MobileNetV2 — with transfer learning and augmentation on <strong>12,000+ images</strong>,
-          15 activity classes.</p>
-        <div class="tags mono"><span>CNN</span><span>Transfer learning</span><span>Keras</span></div>
-      </div>
-      <span class="project-arrow mono" aria-hidden="true">↗</span>
-    </a>
-
-    <a class="project-card reveal" data-tilt href="https://www.kaggle.com/code/sngmtiwri/heart-disease-prediction" target="_blank" rel="noopener">
-      <div class="project-img"><img src="assets/heart-disease.jpg" alt="" loading="lazy"></div>
-      <div class="project-body">
-        <span class="project-idx mono">P·03</span>
-        <h3>Heart Disease Prediction</h3>
-        <p>Logistic regression over clinical features — age, BP, cholesterol, ECG — with full EDA,
-          evaluated on precision, recall, F1 and ROC-AUC.</p>
-        <div class="tags mono"><span>Scikit-learn</span><span>EDA</span><span>ROC-AUC</span></div>
-      </div>
-      <span class="project-arrow mono" aria-hidden="true">↗</span>
-    </a>
-
     <a class="project-card reveal" data-tilt href="https://debate-arena-gold.vercel.app" target="_blank" rel="noopener">
       <div class="project-img"><img src="assets/debate-arena.svg" alt="" loading="lazy"></div>
       <div class="project-body">
-        <span class="project-idx mono">P·04</span>
+        <span class="project-idx mono">P·01</span>
         <h3>AI Debate Arena</h3>
         <p>Live <strong>multi-agent debate platform</strong> — two AI personas argue any topic in real
           time over SSE streams. Users vote on arguments round by round; results persist in
@@ -255,12 +221,50 @@
     <a class="project-card reveal" data-tilt href="https://future-self-g7ahhw9md-sangamtiwari.vercel.app" target="_blank" rel="noopener">
       <div class="project-img"><img src="assets/future-self.svg" alt="" loading="lazy"></div>
       <div class="project-body">
-        <span class="project-idx mono">P·05</span>
+        <span class="project-idx mono">P·02</span>
         <h3>Future Self</h3>
         <p>Type a life dilemma — <strong>three future versions of you</strong> respond at +5, +20 yrs and
           age 80, streamed in parallel. Full <strong class="hl-amber">multi-turn chat</strong> with each
           future self, persisted across sessions.</p>
         <div class="tags mono"><span>FastAPI</span><span>Groq API</span><span>React · Vite</span><span>Supabase</span></div>
+      </div>
+      <span class="project-arrow mono" aria-hidden="true">↗</span>
+    </a>
+
+    <a class="project-card reveal" data-tilt href="https://drive.google.com/drive/u/1/folders/1RPSLO3YMUOiNuQHxU0BbGa5KI-SC9OOU" target="_blank" rel="noopener">
+      <div class="project-img"><img src="assets/sentiment-analysis.jpg" alt="" loading="lazy"></div>
+      <div class="project-body">
+        <span class="project-idx mono">P·03</span>
+        <h3>Sentiment Analysis × Metaheuristics</h3>
+        <p>BiLSTM + Conv1D + Attention over <strong>2M+ samples</strong>; hyperparameters tuned with
+          Genetic Algorithm &amp; Grey Wolf Optimization. <strong class="hl-amber">95%</strong> on Amazon
+          Fine Food Reviews, 85% on Sentiment140.</p>
+        <div class="tags mono"><span>TensorFlow</span><span>BiLSTM</span><span>GA · GWO</span></div>
+      </div>
+      <span class="project-arrow mono" aria-hidden="true">↗</span>
+    </a>
+
+    <a class="project-card reveal" data-tilt href="https://github.com/rmasss123/Human-Activity-Recognition-using-CNN" target="_blank" rel="noopener">
+      <div class="project-img"><img src="assets/activity-recognition.jpg" alt="" loading="lazy"></div>
+      <div class="project-body">
+        <span class="project-idx mono">P·04</span>
+        <h3>Human Activity Recognition</h3>
+        <p>Benchmarked <strong>5 CNN architectures</strong> — VGG, ResNet, GoogLeNet, DenseNet,
+          MobileNetV2 — with transfer learning and augmentation on <strong>12,000+ images</strong>,
+          15 activity classes.</p>
+        <div class="tags mono"><span>CNN</span><span>Transfer learning</span><span>Keras</span></div>
+      </div>
+      <span class="project-arrow mono" aria-hidden="true">↗</span>
+    </a>
+
+    <a class="project-card reveal" data-tilt href="https://www.kaggle.com/code/sngmtiwri/heart-disease-prediction" target="_blank" rel="noopener">
+      <div class="project-img"><img src="assets/heart-disease.jpg" alt="" loading="lazy"></div>
+      <div class="project-body">
+        <span class="project-idx mono">P·05</span>
+        <h3>Heart Disease Prediction</h3>
+        <p>Logistic regression over clinical features — age, BP, cholesterol, ECG — with full EDA,
+          evaluated on precision, recall, F1 and ROC-AUC.</p>
+        <div class="tags mono"><span>Scikit-learn</span><span>EDA</span><span>ROC-AUC</span></div>
       </div>
       <span class="project-arrow mono" aria-hidden="true">↗</span>
     </a>
