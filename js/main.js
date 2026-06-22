@@ -101,6 +101,8 @@
     const ctx = neuralCanvas.getContext('2d');
     const DPR = Math.min(devicePixelRatio, 2);
     let W, H, nodes = [], pulses = [];
+    let cmx = innerWidth * DPR / 2, cmy = innerHeight * DPR / 2;
+    addEventListener('mousemove', e => { cmx = e.clientX * DPR; cmy = e.clientY * DPR; }, {passive:true});
 
     const COLS   = ['#5EE7FF', '#8b5cf6', '#a78bfa', '#FFB454'];
     const N      = Math.min(90, Math.floor(innerWidth * innerHeight / 14000));
@@ -139,12 +141,17 @@
       ctx.clearRect(0, 0, W, H);
 
       /* move nodes, bounce off walls */
+      const repR = 130 * DPR;
       nodes.forEach(n => {
         n.x += n.vx; n.y += n.vy;
         if (n.x < 0 || n.x > W) n.vx *= -1;
         if (n.y < 0 || n.y > H) n.vy *= -1;
         n.glow = Math.max(0, n.glow - 0.018);
         n.phase += 0.018;
+        /* mouse repulsion */
+        const dx = n.x - cmx, dy = n.y - cmy;
+        const d = Math.sqrt(dx*dx + dy*dy);
+        if (d < repR && d > 1) { const f = (repR-d)/repR*1.4; n.x += dx/d*f; n.y += dy/d*f; }
       });
 
       /* draw edges between nearby nodes */
@@ -484,5 +491,63 @@
       setTimeout(() => msg.remove(), 2200);
     }
   });
+
+  /* =====================================================
+     PAGE TRANSITIONS — glitch out then navigate
+     ===================================================== */
+  document.querySelectorAll('a[href]').forEach(a => {
+    const h = a.getAttribute('href');
+    if (h && /^(?!https?:|#|mailto:|tel:).*\.html/.test(h)) {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        document.body.classList.add('leaving');
+        setTimeout(() => { location.href = h; }, 360);
+      });
+    }
+  });
+
+  /* =====================================================
+     CLICK BURST PARTICLES
+     ===================================================== */
+  if (!reduced) {
+    const BC = ['#5EE7FF','#FFB454','#8b5cf6','#ffffff','#a78bfa'];
+    document.addEventListener('click', e => {
+      for (let i = 0; i < 16; i++) {
+        const d = document.createElement('div');
+        d.className = 'burst-dot';
+        const angle = (i / 16) * Math.PI * 2 + (Math.random() - .5) * .9;
+        const dist  = 28 + Math.random() * 85;
+        const sz    = 2 + Math.random() * 5;
+        d.style.cssText = `left:${e.clientX}px;top:${e.clientY}px;` +
+          `width:${sz}px;height:${sz}px;background:${BC[i % BC.length]};` +
+          `--tx:${Math.cos(angle)*dist}px;--ty:${Math.sin(angle)*dist}px;` +
+          `--dur:${(.3+Math.random()*.35).toFixed(2)}s;`;
+        document.body.appendChild(d);
+        setTimeout(() => d.remove(), 700);
+      }
+    });
+  }
+
+  /* =====================================================
+     HERO 3D TILT ON MOUSE MOVE
+     ===================================================== */
+  const heroSec = document.querySelector('.hero');
+  const heroInn = document.querySelector('.hero-inner');
+  if (heroSec && heroInn && fine && !reduced) {
+    let htRaf = null;
+    heroSec.addEventListener('mousemove', e => {
+      if (htRaf) return;
+      htRaf = requestAnimationFrame(() => {
+        const r  = heroSec.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width  - .5;
+        const py = (e.clientY - r.top)  / r.height - .5;
+        heroInn.style.transform = `perspective(1100px) rotateX(${(py*-3.5).toFixed(2)}deg) rotateY(${(px*4.5).toFixed(2)}deg)`;
+        htRaf = null;
+      });
+    });
+    heroSec.addEventListener('mouseleave', () => {
+      heroInn.style.transform = '';
+    });
+  }
 
 })();

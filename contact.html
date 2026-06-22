@@ -1,12 +1,145 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-page="contact">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="0; url=index.html#contact">
-<link rel="canonical" href="index.html#contact">
-<title>Redirecting…</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Sangam Tiwari</title>
+<meta name="description" content="Get in touch with Sangam Tiwari — AI & Data Engineer. View skills, timeline, and contact details.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Sora:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=7">
 </head>
-<body style="background:#0A0E1A;color:#E8ECF4;font-family:monospace;display:grid;place-items:center;height:100vh;margin:0">
-<p>Redirecting → <a href="index.html#contact" style="color:#FFB454">portfolio</a></p>
+<body>
+
+<canvas id="neural-bg" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+<div class="scroll-progress" aria-hidden="true"></div>
+<div class="grid-overlay" aria-hidden="true"></div>
+
+<header class="nav">
+  <nav class="nav-links" aria-label="Sections">
+    <a href="index.html"><span class="nav-idx">00</span>Home</a>
+    <a href="work.html"><span class="nav-idx">01</span>Work</a>
+    <a href="projects.html"><span class="nav-idx">02</span>Projects</a>
+    <a href="contact.html"><span class="nav-idx">03</span>Contact</a>
+  </nav>
+  <div class="nav-right">
+    <span class="nav-clock mono" id="ist-clock" title="My local time">--:--:-- IST</span>
+    <a class="btn btn-amber" href="assets/Sangam_Tiwari_Resume.pdf" target="_blank" rel="noopener" data-magnetic>Resume ↗</a>
+  </div>
+</header>
+
+<main class="page-wrap">
+
+<!-- SKILLS SECTION -->
+<section class="section" id="skills">
+  <div class="section-head reveal">
+    <span class="eyebrow mono">04 / ARSENAL</span>
+    <h2>What I reach for<br><span class="head-dim">when it matters.</span></h2>
+  </div>
+
+  <div class="skills-rows">
+    <div class="skill-row reveal">
+      <span class="skill-cat mono">AI · ML · LLMS</span>
+      <div class="chips">
+        <span class="chip chip-amber">LLMs (GPT-4.1)</span>
+        <span class="chip chip-amber">LangChain</span>
+        <span class="chip chip-amber">Prompt Engineering</span>
+        <span class="chip chip-amber">LightGBM</span>
+        <span class="chip chip-amber">TensorFlow · Keras</span>
+        <span class="chip chip-amber">Scikit-learn</span>
+        <span class="chip chip-amber">SHAP</span>
+        <span class="chip chip-amber">NLP</span>
+      </div>
+    </div>
+    <div class="skill-row reveal">
+      <span class="skill-cat mono">DATA · CLOUD</span>
+      <div class="chips">
+        <span class="chip chip-cyan">BigQuery</span>
+        <span class="chip chip-cyan">PostgreSQL</span>
+        <span class="chip chip-cyan">AWS EC2</span>
+        <span class="chip chip-cyan">FastAPI</span>
+        <span class="chip chip-cyan">Next.js</span>
+        <span class="chip chip-cyan">Playwright</span>
+        <span class="chip chip-cyan">Streamlit</span>
+        <span class="chip chip-cyan">Cron</span>
+      </div>
+    </div>
+    <div class="skill-row reveal">
+      <span class="skill-cat mono">LANGUAGES</span>
+      <div class="chips">
+        <span class="chip">Python</span>
+        <span class="chip">SQL</span>
+        <span class="chip">C++</span>
+        <span class="chip">R</span>
+        <span class="chip">MATLAB</span>
+      </div>
+    </div>
+    <div class="skill-row reveal">
+      <span class="skill-cat mono">FOUNDATIONS</span>
+      <div class="chips">
+        <span class="chip">DSA</span>
+        <span class="chip">DBMS</span>
+        <span class="chip">OOP</span>
+        <span class="chip">Probability &amp; Stats</span>
+        <span class="chip">Linear Algebra</span>
+        <span class="chip">System Design</span>
+        <span class="chip">Operating Systems</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="log reveal">
+    <span class="eyebrow mono">THE TIMELINE — how we got here</span>
+    <ul class="log-list mono">
+      <li><span class="log-t">[2019]</span> PRMO qualified at 15 — the moment I realised I liked hard problems</li>
+      <li><span class="log-t">[2022]</span> Joined NIT Bhopal, B.Tech Mathematics &amp; Data Science — found the language of machines</li>
+      <li><span class="log-t">[2024]</span> Hospitality Lead, E-Cell MANIT — built and ran Central India's largest student hackathon · <span class="hl-amber">2,117+ participants</span></li>
+      <li><span class="log-t">[2024]</span> National Round — Smart India Hackathon · one of ~200 teams nationwide</li>
+      <li><span class="log-t">[2024]</span> Top 10 — Saheogi B-Plan, IIM Ahmedabad · 838 competing teams</li>
+      <li><span class="log-t">[2025]</span> <span class="hl-amber">AIR 6</span> — IIM Sambalpur Ops'timato Case Study · top 6 out of 769 teams</li>
+      <li><span class="log-t">[2026]</span> B.Tech completed · <span class="hl-amber">CGPA 8.71</span> · shipped production AI at Leap · still going</li>
+    </ul>
+  </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section class="section contact" id="contact">
+  <div class="section-head reveal">
+    <span class="eyebrow mono">05 / NEXT CHAPTER</span>
+    <h2>The story isn't<br><span class="hl-amber">finished.</span></h2>
+  </div>
+
+  <div class="about-copy reveal" style="max-width:640px;margin-bottom:52px;">
+    <p style="color:var(--muted);font-size:1.05rem;line-height:1.8;">
+      I'm looking for the next hard problem — the kind where the data is messy,
+      the stakes are real, and the right system actually changes something for someone.
+      If you're building that, or if you just want to talk about LLMs, data pipelines,
+      or what AI can actually do in the real world — I'm here.
+    </p>
+  </div>
+
+  <div class="contact-row reveal">
+    <a class="contact-mail mono" href="mailto:sangam.nitb@gmail.com" data-magnetic>sangam.nitb@gmail.com</a>
+    <div class="contact-links">
+      <a class="btn btn-ghost" href="https://github.com/rmasss123" target="_blank" rel="noopener" data-magnetic>GitHub ↗</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/sangam-tiwari-a2k/" target="_blank" rel="noopener" data-magnetic>LinkedIn ↗</a>
+      <a class="btn btn-amber" href="assets/Sangam_Tiwari_Resume.pdf" target="_blank" rel="noopener" data-magnetic>Resume ↗</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer mono">
+  <span>© 2026 Sangam Tiwari</span>
+  <span class="footer-mid">neural interface — night-shift data console</span>
+  <span>BLR · IST <span id="ist-clock-2">--:--</span></span>
+</footer>
+
+<script src="js/main.js?v=7"></script>
 </body>
 </html>

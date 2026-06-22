@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" data-page="work">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Work — Sangam Tiwari</title>
+<meta name="description" content="How Sangam Tiwari built the AI systems at Leap — LLM call scoring, early warning, multilingual coverage, platform migration.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Sora:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=7">
+</head>
+<body>
+
+<canvas id="neural-bg" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+<div class="scroll-progress" aria-hidden="true"></div>
+<div class="grid-overlay" aria-hidden="true"></div>
+
+<header class="nav">
+  <nav class="nav-links" aria-label="Sections">
+    <a href="index.html"><span class="nav-idx">00</span>Home</a>
+    <a href="work.html"><span class="nav-idx">01</span>Work</a>
+    <a href="projects.html"><span class="nav-idx">02</span>Projects</a>
+    <a href="contact.html"><span class="nav-idx">03</span>Contact</a>
+  </nav>
+  <div class="nav-right">
+    <span class="nav-clock mono" id="ist-clock" title="My local time">--:--:-- IST</span>
+    <a class="btn btn-amber" href="assets/Sangam_Tiwari_Resume.pdf" target="_blank" rel="noopener" data-magnetic>Resume ↗</a>
+  </div>
+</header>
+
+<main class="page-wrap">
+
+<div class="subpage-hero">
+  <p class="subpage-sub mono">02 / THE WORK</p>
+  <h1 class="subpage-title reveal">The year I built<br><span class="head-dim">an ear for Leap.</span></h1>
+  <p class="head-sub mono reveal">ENGINEERING INTERN · BENGALURU · JAN 2026 — PRESENT</p>
+</div>
+
+<section class="section" id="experience" style="padding-top:0">
+
+  <div class="pipeline">
+    <div class="pipe-rail" aria-hidden="true"><div class="pipe-flow"></div></div>
+
+    <article class="stage reveal">
+      <div class="stage-node mono">SCORE</div>
+      <div class="stage-card" data-tilt>
+        <h3>Project Gangajal — giving every call a score</h3>
+        <p>Before this, counselors' calls were a black box. Managers could audit maybe 3% of
+          them manually. I built <strong>Gangajal</strong> — an LLM pipeline on OpenAI + LangChain
+          that scores every single call against quality rubrics, runs on <strong>AWS EC2</strong>
+          via automated cron jobs, and writes structured results to <strong>BigQuery</strong>.
+          The black box opened.</p>
+        <div class="tags mono"><span>OpenAI</span><span>LangChain</span><span>EC2 · cron</span><span>BigQuery</span></div>
+      </div>
+    </article>
+
+    <article class="stage reveal">
+      <div class="stage-node mono">TRANSLATE</div>
+      <div class="stage-card" data-tilt>
+        <h3>Breaking the language wall</h3>
+        <p>Students speak Tamil, Telugu, Hindi, Marathi. The pipeline didn't.
+          I extended Gangajal with <strong>LLM-powered transcript translation</strong> across
+          four regional languages, with retry logic and fault-tolerance baked in.
+          Coverage went from partial to <strong class="hl-amber">100% of all calls</strong>
+          — no conversation left unheard.</p>
+        <div class="tags mono"><span>GPT-4.1</span><span>4 languages</span><span>fault-tolerant</span></div>
+      </div>
+    </article>
+
+    <article class="stage reveal">
+      <div class="stage-node mono">DETECT</div>
+      <div class="stage-card" data-tilt>
+        <h3>The early warning system — catching churn before it happens</h3>
+        <p>By the time a student stops responding, it's usually too late. I built an
+          <strong>LLM analysis layer over WhatsApp conversations</strong> that reads between the
+          lines — detecting frustration, confusion, and disengagement <em>early</em>,
+          so counselors can step in while the relationship is still warm.</p>
+        <div class="tags mono"><span>LLM analysis</span><span>risk signals</span><span>proactive ops</span></div>
+      </div>
+    </article>
+
+    <article class="stage reveal">
+      <div class="stage-node mono">SERVE</div>
+      <div class="stage-card" data-tilt>
+        <h3>Rebuilding the foundation — platform migration</h3>
+        <p>The analytics dashboard was a Streamlit prototype on Postgres. I migrated it to a
+          proper <strong>Next.js + FastAPI</strong> product backed by <strong>BigQuery</strong>,
+          and rewrote the data layer with <strong>multi-CTE SQL pipelines</strong> using
+          window functions — tracking the counselling funnel, visa timelines, and lead
+          attribution end-to-end.</p>
+        <div class="tags mono"><span>Next.js</span><span>FastAPI</span><span>BigQuery</span><span>SQL · CTEs</span></div>
+      </div>
+    </article>
+
+    <article class="stage reveal">
+      <div class="stage-node mono">PREDICT</div>
+      <div class="stage-card" data-tilt>
+        <h3>Who's actually going to convert?</h3>
+        <p>Not all leads are equal. I trained a <strong>LightGBM model</strong> on profile data,
+          counselor-interaction signals, and app engagement — then used <strong>SHAP</strong>
+          to make the predictions explainable. Now counselors see a ranked queue every morning,
+          with the highest-intent students at the top.</p>
+        <div class="tags mono"><span>LightGBM</span><span>SHAP</span><span>feature engineering</span></div>
+      </div>
+    </article>
+
+    <article class="stage reveal">
+      <div class="stage-node mono">INDEX</div>
+      <div class="stage-card" data-tilt>
+        <h3>Building the world's colleges into a database</h3>
+        <p>The College Finder product needed data on every university a student might consider.
+          I built a <strong>Playwright-powered scraping system</strong> that assembled a
+          hierarchical database of <strong>1,000+ institutions and 100,000+ courses</strong>
+          — the knowledge base underneath the product.</p>
+        <div class="tags mono"><span>Playwright</span><span>1,000+ unis</span><span>100K+ courses</span></div>
+      </div>
+    </article>
+  </div>
+
+  <div class="contact-row reveal" style="border-top:1px solid var(--line);padding-top:44px;margin-top:60px;">
+    <p class="mono" style="color:var(--muted);font-size:.82rem;letter-spacing:.1em;">WHAT I BUILT OUTSIDE WORK</p>
+    <a class="btn btn-amber" href="projects.html" data-magnetic>See the experiments ↗</a>
+  </div>
+
+</section>
+
+</main>
+
+<footer class="footer mono">
+  <span>© 2026 Sangam Tiwari</span>
+  <span class="footer-mid">neural interface — night-shift data console</span>
+  <span>BLR · IST <span id="ist-clock-2">--:--</span></span>
+</footer>
+
+<script src="js/main.js?v=7"></script>
+</body>
+</html>

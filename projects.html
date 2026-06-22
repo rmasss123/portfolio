@@ -1,12 +1,132 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-page="projects">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="0; url=index.html#projects">
-<link rel="canonical" href="index.html#projects">
-<title>Redirecting…</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Experiments — Sangam Tiwari</title>
+<meta name="description" content="Side projects by Sangam Tiwari — AI Debate Arena, Future Self, Sentiment Analysis, Human Activity Recognition, Heart Disease Prediction.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Sora:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=7">
 </head>
-<body style="background:#0A0E1A;color:#E8ECF4;font-family:monospace;display:grid;place-items:center;height:100vh;margin:0">
-<p>Redirecting → <a href="index.html#projects" style="color:#FFB454">portfolio</a></p>
+<body>
+
+<canvas id="neural-bg" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+<div class="scroll-progress" aria-hidden="true"></div>
+<div class="grid-overlay" aria-hidden="true"></div>
+
+<header class="nav">
+  <nav class="nav-links" aria-label="Sections">
+    <a href="index.html"><span class="nav-idx">00</span>Home</a>
+    <a href="work.html"><span class="nav-idx">01</span>Work</a>
+    <a href="projects.html"><span class="nav-idx">02</span>Projects</a>
+    <a href="contact.html"><span class="nav-idx">03</span>Contact</a>
+  </nav>
+  <div class="nav-right">
+    <span class="nav-clock mono" id="ist-clock" title="My local time">--:--:-- IST</span>
+    <a class="btn btn-amber" href="assets/Sangam_Tiwari_Resume.pdf" target="_blank" rel="noopener" data-magnetic>Resume ↗</a>
+  </div>
+</header>
+
+<main class="page-wrap">
+
+<div class="subpage-hero">
+  <p class="subpage-sub mono">03 / EXPERIMENTS</p>
+  <h1 class="subpage-title reveal">Things I built<br><span class="head-dim">because I wondered.</span></h1>
+</div>
+
+<section class="section" id="projects" style="padding-top:0">
+
+  <div class="projects-grid">
+    <a class="project-card reveal" data-tilt href="https://debate-arena-gold.vercel.app" target="_blank" rel="noopener">
+      <div class="project-img"><img src="assets/debate-arena.svg" alt="AI Debate Arena" loading="lazy"></div>
+      <div class="project-body">
+        <span class="project-idx mono">P·01</span>
+        <h3>AI Debate Arena</h3>
+        <p>I kept wondering: <em>what happens when two AIs argue?</em> So I built the arena.
+          Two AI personas clash on any topic in real-time over <strong>SSE streams</strong>.
+          The crowd votes. The results are stored. It reveals a lot about how language models
+          reason under pressure.</p>
+        <div class="tags mono"><span>FastAPI</span><span>Groq API</span><span>Next.js</span><span>Supabase</span></div>
+      </div>
+      <span class="project-arrow mono" aria-hidden="true">↗</span>
+    </a>
+
+    <a class="project-card reveal" data-tilt href="https://future-self-g7ahhw9md-sangamtiwari.vercel.app" target="_blank" rel="noopener">
+      <div class="project-img"><img src="assets/future-self.svg" alt="Future Self" loading="lazy"></div>
+      <div class="project-body">
+        <span class="project-idx mono">P·02</span>
+        <h3>Future Self</h3>
+        <p>Built for myself, honestly. When I'm stuck on a hard decision, I want perspective
+          — not advice from someone my age, but from the versions of me that have already
+          lived through it. Describe your dilemma. <strong>Three future yous</strong> respond
+          simultaneously — at +5, +20 years, and at 80. Then you talk to each one.</p>
+        <div class="tags mono"><span>FastAPI</span><span>Groq API</span><span>React · Vite</span><span>Supabase</span></div>
+      </div>
+      <span class="project-arrow mono" aria-hidden="true">↗</span>
+    </a>
+
+    <a class="project-card reveal" data-tilt href="https://drive.google.com/drive/u/1/folders/1RPSLO3YMUOiNuQHxU0BbGa5KI-SC9OOU" target="_blank" rel="noopener">
+      <div class="project-img"><img src="assets/sentiment-analysis.jpg" alt="Sentiment Analysis" loading="lazy"></div>
+      <div class="project-body">
+        <span class="project-idx mono">P·03</span>
+        <h3>Sentiment Analysis × Metaheuristics</h3>
+        <p>A deep learning research project — <strong>BiLSTM + Conv1D + Attention</strong> trained
+          on 2M+ samples, hyperparameters evolved with <strong>Genetic Algorithm and Grey Wolf
+          Optimization</strong>. Hit <strong class="hl-amber">95%</strong> on Amazon Food Reviews,
+          85% on Sentiment140.</p>
+        <div class="tags mono"><span>TensorFlow</span><span>BiLSTM</span><span>GA · GWO</span></div>
+      </div>
+      <span class="project-arrow mono" aria-hidden="true">↗</span>
+    </a>
+
+    <a class="project-card reveal" data-tilt href="https://github.com/rmasss123/Human-Activity-Recognition-using-CNN" target="_blank" rel="noopener">
+      <div class="project-img"><img src="assets/activity-recognition.jpg" alt="Human Activity Recognition" loading="lazy"></div>
+      <div class="project-body">
+        <span class="project-idx mono">P·04</span>
+        <h3>Human Activity Recognition</h3>
+        <p>A systematic benchmark of <strong>VGG, ResNet, GoogLeNet, DenseNet, and MobileNetV2</strong>
+          on 12,000+ images across 15 activity classes — consistent transfer learning and
+          augmentation across all architectures. Learned more from the gaps than the results.</p>
+        <div class="tags mono"><span>CNN</span><span>Transfer learning</span><span>Keras</span></div>
+      </div>
+      <span class="project-arrow mono" aria-hidden="true">↗</span>
+    </a>
+
+    <a class="project-card reveal" data-tilt href="https://www.kaggle.com/code/sngmtiwri/heart-disease-prediction" target="_blank" rel="noopener">
+      <div class="project-img"><img src="assets/heart-disease.jpg" alt="Heart Disease Prediction" loading="lazy"></div>
+      <div class="project-body">
+        <span class="project-idx mono">P·05</span>
+        <h3>Heart Disease Prediction</h3>
+        <p>One of my earliest ML projects — and still one of the most grounding ones.
+          Clinical features: age, BP, cholesterol, ECG. Full EDA, logistic regression,
+          evaluated on precision, recall, F1, ROC-AUC. Medicine taught me to care about
+          <strong>false negatives</strong>.</p>
+        <div class="tags mono"><span>Scikit-learn</span><span>EDA</span><span>ROC-AUC</span></div>
+      </div>
+      <span class="project-arrow mono" aria-hidden="true">↗</span>
+    </a>
+  </div>
+
+  <div class="contact-row reveal" style="border-top:1px solid var(--line);padding-top:44px;margin-top:60px;">
+    <p class="mono" style="color:var(--muted);font-size:.82rem;letter-spacing:.1em;">READY TO COLLABORATE?</p>
+    <a class="btn btn-amber" href="contact.html" data-magnetic>Let's connect ↗</a>
+  </div>
+
+</section>
+
+</main>
+
+<footer class="footer mono">
+  <span>© 2026 Sangam Tiwari</span>
+  <span class="footer-mid">neural interface — night-shift data console</span>
+  <span>BLR · IST <span id="ist-clock-2">--:--</span></span>
+</footer>
+
+<script src="js/main.js?v=7"></script>
 </body>
 </html>

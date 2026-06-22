@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-page="home">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Sora:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=6">
+<link rel="stylesheet" href="css/style.css?v=7">
 </head>
 <body>
 
@@ -38,11 +38,10 @@
 <!-- ============ NAV ============ -->
 <header class="nav">
   <nav class="nav-links" aria-label="Sections">
-    <a href="#about"><span class="nav-idx">01</span>About</a>
-    <a href="#experience"><span class="nav-idx">02</span>Experience</a>
-    <a href="#projects"><span class="nav-idx">03</span>Projects</a>
-    <a href="#skills"><span class="nav-idx">04</span>Skills</a>
-    <a href="#contact"><span class="nav-idx">05</span>Contact</a>
+    <a href="index.html"><span class="nav-idx">00</span>Home</a>
+    <a href="work.html"><span class="nav-idx">01</span>Work</a>
+    <a href="projects.html"><span class="nav-idx">02</span>Projects</a>
+    <a href="contact.html"><span class="nav-idx">03</span>Contact</a>
   </nav>
   <div class="nav-right">
     <span class="nav-clock mono" id="ist-clock" title="My local time">--:--:-- IST</span>
@@ -50,7 +49,7 @@
   </div>
 </header>
 
-<main id="top">
+<main id="top" class="page-wrap">
 
 <!-- ============ HERO ============ -->
 <section class="hero">
@@ -72,8 +71,8 @@
       and decides what happens next.</p>
 
     <div class="hero-cta">
-      <a class="btn btn-amber" href="#about" data-magnetic>Read the story ↓</a>
-      <a class="btn btn-ghost" href="#contact" data-magnetic>Let's talk</a>
+      <a class="btn btn-amber" href="work.html" data-magnetic>See the work ↗</a>
+      <a class="btn btn-ghost" href="contact.html" data-magnetic>Let's talk</a>
     </div>
   </div>
 
@@ -126,14 +125,27 @@
         sometimes just sit with a hard problem until it opens up.</p>
 
       <div class="stats">
-        <div class="stat"><span class="stat-num mono" data-count="100" data-suffix="K+">0</span><span class="stat-label">courses indexed</span></div>
-        <div class="stat"><span class="stat-num mono" data-count="8.71" data-decimals="2">0</span><span class="stat-label">CGPA · NIT Bhopal</span></div>
+        <div class="stat"><span class="stat-num mono" data-count="6" data-suffix="">0</span><span class="stat-label">AIR · Ops'timato, IIM Sambalpur · 769 teams</span></div>
+        <div class="stat"><span class="stat-num mono" data-count="2117" data-suffix="+">0</span><span class="stat-label">hackathon participants led · E-Cell MANIT</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ EXPERIENCE / PIPELINE ============ -->
+<!-- ============ EXPLORE CTA ============ -->
+<section class="section" style="padding-top:60px;padding-bottom:120px;" id="explore">
+  <div class="contact-row reveal" style="border-top:1px solid var(--line);padding-top:44px;">
+    <p class="mono" style="color:var(--muted);font-size:.82rem;letter-spacing:.1em;">CONTINUE THE STORY</p>
+    <div class="contact-links">
+      <a class="btn btn-amber" href="work.html" data-magnetic>The work at Leap ↗</a>
+      <a class="btn btn-ghost" href="projects.html" data-magnetic>Side experiments ↗</a>
+      <a class="btn btn-ghost" href="contact.html" data-magnetic>Let's connect ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- REMOVED: experience, projects, skills, contact moved to own pages -->
+<!--
 <section class="section" id="experience">
   <div class="section-head reveal">
     <span class="eyebrow mono">02 / THE WORK</span>
@@ -368,6 +380,7 @@
     </div>
   </div>
 </section>
+-->
 
 </main>
 
@@ -377,6 +390,6 @@
   <span>BLR · IST <span id="ist-clock-2">--:--</span></span>
 </footer>
 
-<script src="js/main.js?v=6"></script>
+<script src="js/main.js?v=7"></script>
 </body>
 </html>

@@ -509,6 +509,66 @@ body.overdrive{filter:hue-rotate(120deg) saturate(1.8)}
   .contact-row{flex-direction:column;align-items:flex-start}
 }
 
+/* ===================== PAGE TRANSITIONS ===================== */
+main.page-wrap{animation:pg-enter .55s var(--ease) both}
+body.leaving main.page-wrap{animation:pg-leave .36s var(--ease) both}
+@keyframes pg-enter{
+  from{opacity:0;transform:translateY(26px);filter:blur(6px) hue-rotate(30deg)}
+  to{opacity:1;transform:none;filter:none}
+}
+@keyframes pg-leave{
+  0%{opacity:1;transform:none;filter:none}
+  45%{opacity:.5;transform:skewX(-2deg) translateX(10px);filter:hue-rotate(90deg) brightness(1.5)}
+  100%{opacity:0;transform:translateY(-22px);filter:blur(8px)}
+}
+
+/* active nav per page */
+[data-page="home"]     .nav-links a[href="index.html"],
+[data-page="work"]     .nav-links a[href="work.html"],
+[data-page="projects"] .nav-links a[href="projects.html"],
+[data-page="contact"]  .nav-links a[href="contact.html"]{color:var(--amber)}
+[data-page="home"]     .nav-links a[href="index.html"]::after,
+[data-page="work"]     .nav-links a[href="work.html"]::after,
+[data-page="projects"] .nav-links a[href="projects.html"]::after,
+[data-page="contact"]  .nav-links a[href="contact.html"]::after{width:100%;background:var(--amber)}
+
+/* ===================== CHROMATIC ABERRATION ===================== */
+.hero-name .word{
+  text-shadow:-2px 0 rgba(94,231,255,.24), 2px 0 rgba(255,180,84,.24);
+  animation:chroma-breathe 8s ease-in-out infinite;
+}
+@keyframes chroma-breathe{
+  0%,100%{text-shadow:-2px 0 rgba(94,231,255,.24), 2px 0 rgba(255,180,84,.24)}
+  50%{text-shadow:-6px 0 rgba(94,231,255,.09), 6px 0 rgba(255,180,84,.09)}
+}
+
+/* ===================== CLICK BURST ===================== */
+.burst-dot{
+  position:fixed;border-radius:50%;pointer-events:none;z-index:9993;
+  transform:translate(-50%,-50%);
+  animation:burst-out var(--dur,.5s) ease-out forwards;
+}
+@keyframes burst-out{
+  from{opacity:.85;transform:translate(-50%,-50%) scale(1.3)}
+  to{opacity:0;transform:translate(calc(-50% + var(--tx)),calc(-50% + var(--ty))) scale(0)}
+}
+
+/* ===================== SUBPAGE HEADER ===================== */
+.subpage-hero{
+  position:relative;z-index:2;
+  padding:148px 32px 56px;max-width:var(--max);margin:0 auto;
+}
+.subpage-title{
+  font-family:var(--disp);font-weight:800;text-transform:uppercase;
+  font-size:clamp(2.6rem,8vw,6.2rem);line-height:.94;letter-spacing:-.02em;
+  margin-bottom:18px;
+}
+.subpage-sub{
+  font-size:.76rem;letter-spacing:.2em;color:var(--muted);
+  text-transform:uppercase;font-family:var(--mono);
+}
+@media(max-width:640px){.subpage-hero{padding:120px 18px 40px}}
+
 /* ===================== ACCESSIBILITY ===================== */
 :focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
 @media(prefers-reduced-motion:reduce){
