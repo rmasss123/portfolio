@@ -9,9 +9,13 @@
   /* =====================================================
      TEXT SCRAMBLE
      ===================================================== */
-  const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZアイウエオ#$%@&!?><-_';
+  const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ#$%@&!?><-_';
   function scrambleTo(el, text, duration, onDone) {
     if (!el) return;
+    /* lock element width before scramble so layout never shifts */
+    el.textContent = text;
+    el.style.display = 'inline-block';
+    el.style.minWidth = el.getBoundingClientRect().width + 'px';
     let startTs = null;
     function frame(ts) {
       if (!startTs) startTs = ts;
