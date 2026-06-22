@@ -103,11 +103,10 @@
 
     function build() {
       nodes = []; edges = []; pulses = [];
-      const hero = neuralCanvas.closest('.hero') || neuralCanvas.parentElement;
-      W = neuralCanvas.width  = hero.offsetWidth  * DPR;
-      H = neuralCanvas.height = hero.offsetHeight * DPR;
-      neuralCanvas.style.width  = hero.offsetWidth  + 'px';
-      neuralCanvas.style.height = hero.offsetHeight + 'px';
+      W = neuralCanvas.width  = innerWidth  * DPR;
+      H = neuralCanvas.height = innerHeight * DPR;
+      neuralCanvas.style.width  = innerWidth  + 'px';
+      neuralCanvas.style.height = innerHeight + 'px';
 
       const L      = LAYERS.length;
       const xStart = W * 0.04, xEnd = W * 0.96;
