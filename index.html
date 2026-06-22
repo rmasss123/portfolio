@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sangam Tiwari — AI & Data Engineer</title>
-<meta name="description" content="Sangam Tiwari builds production LLM systems — call scoring pipelines, early-warning systems, and data infrastructure at Leap.">
+<title>Sangam Tiwari — I taught machines to listen</title>
+<meta name="description" content="Sangam Tiwari — from a maths olympiad at 15 to production LLM systems at 22. Engineering Intern at Leap, NIT Bhopal. I build AI that turns human conversations into signal.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Sora:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -57,7 +57,7 @@
   <div class="chip-layer" id="chip-layer" aria-hidden="true"></div>
 
   <div class="hero-inner">
-    <p class="terminal-line mono"><span class="t-prompt">ubuntu@ec2</span>:<span class="t-path">~</span>$ <span id="term-typed"></span><span class="t-caret">▌</span></p>
+    <p class="terminal-line mono"><span class="t-prompt">ubuntu@ec2</span>:<span class="t-path">~/gangajal</span>$ <span id="term-typed"></span><span class="t-caret">▌</span></p>
 
     <h1 class="hero-name">
       <span class="line"><span class="word" id="hero-w1">SANGAM</span></span>
@@ -66,13 +66,14 @@
 
     <p class="hero-role mono"><span class="role-pre">// </span><span id="role-typed"></span></p>
 
-    <p class="hero-sub">I turn raw conversations into signal — building LLM pipelines that
-      score <em>thousands of counselling calls</em>, flag at-risk students from WhatsApp chats,
-      and ship the data infrastructure underneath it all.</p>
+    <p class="hero-sub">From a maths olympiad at 15 to production LLM systems at 22 —
+      I've spent seven years learning to make <em>data speak</em>.
+      Right now I'm at Leap, building AI that listens to every student conversation
+      and decides what happens next.</p>
 
     <div class="hero-cta">
-      <a class="btn btn-amber" href="#experience" data-magnetic>See the pipeline ↓</a>
-      <a class="btn btn-ghost" href="#contact" data-magnetic>Get in touch</a>
+      <a class="btn btn-amber" href="#about" data-magnetic>Read the story ↓</a>
+      <a class="btn btn-ghost" href="#contact" data-magnetic>Let's talk</a>
     </div>
   </div>
 
@@ -94,8 +95,8 @@
 <!-- ============ ABOUT ============ -->
 <section class="section" id="about">
   <div class="section-head reveal">
-    <span class="eyebrow mono">01 / WHO</span>
-    <h2>Signal &gt; noise</h2>
+    <span class="eyebrow mono">01 / ORIGIN</span>
+    <h2 data-text="I grew up in patterns.">I grew up<br><span class="head-dim">in patterns.</span></h2>
   </div>
 
   <div class="about-grid">
@@ -108,14 +109,21 @@
     </div>
 
     <div class="about-copy reveal">
-      <p>I'm an <strong>Engineering Intern at Leap</strong> in Bengaluru,
-        where I build the AI systems that listen to every counselling conversation the
-        business has — then score them, translate them, and raise a hand when a student
-        is about to slip away.</p>
-      <p>My home turf is the seam between <span class="hl-amber">LLM engineering</span> and
-        <span class="hl-cyan">data engineering</span>: prompt-driven scoring systems on OpenAI
-        models, BigQuery pipelines that feed them, and the Next.js + FastAPI surfaces
-        people actually use. B.Tech in Mathematics &amp; Data Science, NIT Bhopal.</p>
+      <p>It started with a maths olympiad in 2019. I was 15, and I realized that the most
+        interesting thing about numbers wasn't solving them — it was what they <strong>revealed
+        about the world underneath</strong>. That instinct led me to NIT Bhopal, a B.Tech in
+        Mathematics &amp; Data Science, and eventually to the question I keep coming back to:
+        <em>what is this messy human data actually trying to say?</em></p>
+
+      <p>At <strong>Leap</strong> in Bengaluru, I found the answer in conversations. Every day,
+        hundreds of counselors talk to students about studying abroad — and almost none of
+        those conversations were being heard at scale. I built the systems that changed that.
+        <span class="hl-amber">LLM pipelines</span> that score calls, detect risk, translate
+        across four languages, and surface the students who need help before they disappear.</p>
+
+      <p>Outside work, I build things I'm curious about — an arena where two AIs debate,
+        a tool that lets you talk to your 80-year-old self. I compete, lead teams, and
+        sometimes just sit with a hard problem until it opens up.</p>
 
       <div class="stats">
         <div class="stat"><span class="stat-num mono" data-count="100" data-suffix="K+">0</span><span class="stat-label">courses indexed</span></div>
@@ -128,8 +136,8 @@
 <!-- ============ EXPERIENCE / PIPELINE ============ -->
 <section class="section" id="experience">
   <div class="section-head reveal">
-    <span class="eyebrow mono">02 / THE PIPELINE</span>
-    <h2>Leap</h2>
+    <span class="eyebrow mono">02 / THE WORK</span>
+    <h2>The year I built<br><span class="head-dim">an ear for Leap.</span></h2>
     <p class="head-sub mono">ENGINEERING INTERN · BENGALURU · JAN 2026 — PRESENT</p>
   </div>
 
@@ -139,11 +147,12 @@
     <article class="stage reveal">
       <div class="stage-node mono">SCORE</div>
       <div class="stage-card" data-tilt>
-        <h3>Project Gangajal — LLM call scoring</h3>
-        <p>A production <strong>LLM-based counselor call scoring system</strong> (OpenAI, Python,
-          LangChain) hitting <strong class="hl-amber">96.5% accuracy</strong> with a
-          <strong class="hl-amber">50× jump</strong> in call-quality audit coverage — deployed on
-          <strong>AWS EC2</strong> via automated cron pipelines, with <strong>BigQuery</strong> as the data layer.</p>
+        <h3>Project Gangajal — giving every call a score</h3>
+        <p>Before this, counselors' calls were a black box. Managers could audit maybe 3% of
+          them manually. I built <strong>Gangajal</strong> — an LLM pipeline on OpenAI + LangChain
+          that scores every single call against quality rubrics, runs on <strong>AWS EC2</strong>
+          via automated cron jobs, and writes structured results to <strong>BigQuery</strong>.
+          The black box opened.</p>
         <div class="tags mono"><span>OpenAI</span><span>LangChain</span><span>EC2 · cron</span><span>BigQuery</span></div>
       </div>
     </article>
@@ -151,10 +160,12 @@
     <article class="stage reveal">
       <div class="stage-node mono">TRANSLATE</div>
       <div class="stage-card" data-tilt>
-        <h3>Multilingual coverage</h3>
-        <p>Extended the pipeline with <strong>LLM translation of regional transcripts</strong> —
-          Hindi, Tamil, Telugu, Marathi — wrapped in retry and fault-tolerance logic, pushing
-          analysis to <strong class="hl-amber">100% of counselling calls</strong>.</p>
+        <h3>Breaking the language wall</h3>
+        <p>Students speak Tamil, Telugu, Hindi, Marathi. The pipeline didn't.
+          I extended Gangajal with <strong>LLM-powered transcript translation</strong> across
+          four regional languages, with retry logic and fault-tolerance baked in.
+          Coverage went from partial to <strong class="hl-amber">100% of all calls</strong>
+          — no conversation left unheard.</p>
         <div class="tags mono"><span>GPT-4.1</span><span>4 languages</span><span>fault-tolerant</span></div>
       </div>
     </article>
@@ -162,10 +173,11 @@
     <article class="stage reveal">
       <div class="stage-node mono">DETECT</div>
       <div class="stage-card" data-tilt>
-        <h3>Early warning system — WhatsApp</h3>
-        <p>LLM analysis over <strong>student WhatsApp conversations</strong> that flags drop-off
-          risk and dissatisfaction <em>before</em> they become churn — so counselors step in
-          while it still matters.</p>
+        <h3>The early warning system — catching churn before it happens</h3>
+        <p>By the time a student stops responding, it's usually too late. I built an
+          <strong>LLM analysis layer over WhatsApp conversations</strong> that reads between the
+          lines — detecting frustration, confusion, and disengagement <em>early</em>,
+          so counselors can step in while the relationship is still warm.</p>
         <div class="tags mono"><span>LLM analysis</span><span>risk signals</span><span>proactive ops</span></div>
       </div>
     </article>
@@ -173,11 +185,12 @@
     <article class="stage reveal">
       <div class="stage-node mono">SERVE</div>
       <div class="stage-card" data-tilt>
-        <h3>Platform migration</h3>
-        <p>Moved the Gangajal analytics platform from <strong>Streamlit to Next.js + FastAPI</strong>
-          and its database from <strong>PostgreSQL to BigQuery</strong> — authoring optimized
-          <strong>multi-CTE SQL pipelines</strong> with window functions for the counselling funnel,
-          visa tracking, and lead attribution.</p>
+        <h3>Rebuilding the foundation — platform migration</h3>
+        <p>The analytics dashboard was a Streamlit prototype on Postgres. I migrated it to a
+          proper <strong>Next.js + FastAPI</strong> product backed by <strong>BigQuery</strong>,
+          and rewrote the data layer with <strong>multi-CTE SQL pipelines</strong> using
+          window functions — tracking the counselling funnel, visa timelines, and lead
+          attribution end-to-end.</p>
         <div class="tags mono"><span>Next.js</span><span>FastAPI</span><span>BigQuery</span><span>SQL · CTEs</span></div>
       </div>
     </article>
@@ -185,10 +198,11 @@
     <article class="stage reveal">
       <div class="stage-node mono">PREDICT</div>
       <div class="stage-card" data-tilt>
-        <h3>Conversion prediction model</h3>
-        <p>A <strong>LightGBM model</strong> over profile, counselor-interaction and app-engagement
-          signals, with <strong>SHAP explainability</strong> — so high-intent students surface at the
-          top of every counselor's queue.</p>
+        <h3>Who's actually going to convert?</h3>
+        <p>Not all leads are equal. I trained a <strong>LightGBM model</strong> on profile data,
+          counselor-interaction signals, and app engagement — then used <strong>SHAP</strong>
+          to make the predictions explainable. Now counselors see a ranked queue every morning,
+          with the highest-intent students at the top.</p>
         <div class="tags mono"><span>LightGBM</span><span>SHAP</span><span>feature engineering</span></div>
       </div>
     </article>
@@ -196,9 +210,11 @@
     <article class="stage reveal">
       <div class="stage-node mono">INDEX</div>
       <div class="stage-card" data-tilt>
-        <h3>University database — College Finder</h3>
-        <p>A <strong>hierarchical database of 1,000+ institutions and 100K+ courses</strong> powering
-          the College Finder product — built with <strong>Playwright</strong>-driven scraping automation.</p>
+        <h3>Building the world's colleges into a database</h3>
+        <p>The College Finder product needed data on every university a student might consider.
+          I built a <strong>Playwright-powered scraping system</strong> that assembled a
+          hierarchical database of <strong>1,000+ institutions and 100,000+ courses</strong>
+          — the knowledge base underneath the product.</p>
         <div class="tags mono"><span>Playwright</span><span>1,000+ unis</span><span>100K+ courses</span></div>
       </div>
     </article>
@@ -208,8 +224,8 @@
 <!-- ============ PROJECTS ============ -->
 <section class="section" id="projects">
   <div class="section-head reveal">
-    <span class="eyebrow mono">03 / LAB</span>
-    <h2>Selected projects</h2>
+    <span class="eyebrow mono">03 / EXPERIMENTS</span>
+    <h2>Things I built<br><span class="head-dim">because I wondered.</span></h2>
   </div>
 
   <div class="projects-grid">
@@ -218,9 +234,10 @@
       <div class="project-body">
         <span class="project-idx mono">P·01</span>
         <h3>AI Debate Arena</h3>
-        <p>Live <strong>multi-agent debate platform</strong> — two AI personas argue any topic in real
-          time over SSE streams. Users vote on arguments round by round; results persist in
-          <strong class="hl-amber">Supabase</strong>.</p>
+        <p>I kept wondering: <em>what happens when two AIs argue?</em> So I built the arena.
+          Two AI personas clash on any topic in real-time over <strong>SSE streams</strong>.
+          The crowd votes. The results are stored. It's part experiment, part spectacle —
+          and it reveals a lot about how language models reason under pressure.</p>
         <div class="tags mono"><span>FastAPI</span><span>Groq API</span><span>Next.js</span><span>Supabase</span></div>
       </div>
       <span class="project-arrow mono" aria-hidden="true">↗</span>
@@ -231,9 +248,10 @@
       <div class="project-body">
         <span class="project-idx mono">P·02</span>
         <h3>Future Self</h3>
-        <p>Type a life dilemma — <strong>three future versions of you</strong> respond at +5, +20 yrs and
-          age 80, streamed in parallel. Full <strong class="hl-amber">multi-turn chat</strong> with each
-          future self, persisted across sessions.</p>
+        <p>Built for myself, honestly. When I'm stuck on a hard decision, I want perspective
+          — not advice from someone my age, but from the versions of me that have already
+          lived through it. Describe your dilemma. <strong>Three future yous</strong> respond
+          simultaneously — you at +5 years, +20 years, and at 80. Then you talk to each one.</p>
         <div class="tags mono"><span>FastAPI</span><span>Groq API</span><span>React · Vite</span><span>Supabase</span></div>
       </div>
       <span class="project-arrow mono" aria-hidden="true">↗</span>
@@ -244,9 +262,10 @@
       <div class="project-body">
         <span class="project-idx mono">P·03</span>
         <h3>Sentiment Analysis × Metaheuristics</h3>
-        <p>BiLSTM + Conv1D + Attention over <strong>2M+ samples</strong>; hyperparameters tuned with
-          Genetic Algorithm &amp; Grey Wolf Optimization. <strong class="hl-amber">95%</strong> on Amazon
-          Fine Food Reviews, 85% on Sentiment140.</p>
+        <p>My deep learning research project — a <strong>BiLSTM + Conv1D + Attention</strong> model
+          trained on 2M+ samples. What made it different: instead of manual hyperparameter
+          tuning, I used <strong>Genetic Algorithm and Grey Wolf Optimization</strong> to evolve
+          the best config. Hit 95% on Amazon Food Reviews, 85% on Sentiment140.</p>
         <div class="tags mono"><span>TensorFlow</span><span>BiLSTM</span><span>GA · GWO</span></div>
       </div>
       <span class="project-arrow mono" aria-hidden="true">↗</span>
@@ -257,9 +276,11 @@
       <div class="project-body">
         <span class="project-idx mono">P·04</span>
         <h3>Human Activity Recognition</h3>
-        <p>Benchmarked <strong>5 CNN architectures</strong> — VGG, ResNet, GoogLeNet, DenseNet,
-          MobileNetV2 — with transfer learning and augmentation on <strong>12,000+ images</strong>,
-          15 activity classes.</p>
+        <p>A systematic benchmark — I wanted to understand how different CNN architectures
+          actually compare in practice, not just in papers. Ran <strong>VGG, ResNet, GoogLeNet,
+          DenseNet, and MobileNetV2</strong> on 12,000+ images across 15 activity classes
+          with consistent transfer learning and augmentation. Learned more from the gaps than
+          the results.</p>
         <div class="tags mono"><span>CNN</span><span>Transfer learning</span><span>Keras</span></div>
       </div>
       <span class="project-arrow mono" aria-hidden="true">↗</span>
@@ -270,8 +291,11 @@
       <div class="project-body">
         <span class="project-idx mono">P·05</span>
         <h3>Heart Disease Prediction</h3>
-        <p>Logistic regression over clinical features — age, BP, cholesterol, ECG — with full EDA,
-          evaluated on precision, recall, F1 and ROC-AUC.</p>
+        <p>One of my earliest ML projects — and still one of the most grounding ones.
+          Clinical features: age, blood pressure, cholesterol, ECG readings.
+          The question: can a model flag heart disease risk before symptoms do?
+          Full EDA, logistic regression, evaluation across precision, recall, F1, ROC-AUC.
+          Medicine taught me to care about false negatives.</p>
         <div class="tags mono"><span>Scikit-learn</span><span>EDA</span><span>ROC-AUC</span></div>
       </div>
       <span class="project-arrow mono" aria-hidden="true">↗</span>
@@ -282,8 +306,8 @@
 <!-- ============ SKILLS ============ -->
 <section class="section" id="skills">
   <div class="section-head reveal">
-    <span class="eyebrow mono">04 / STACK</span>
-    <h2>Tools of the trade</h2>
+    <span class="eyebrow mono">04 / ARSENAL</span>
+    <h2>What I reach for<br><span class="head-dim">when it matters.</span></h2>
   </div>
 
   <div class="skills-rows">
@@ -306,14 +330,15 @@
   </div>
 
   <div class="log reveal">
-    <span class="eyebrow mono">RUN LOG — education &amp; honors</span>
+    <span class="eyebrow mono">THE TIMELINE — how we got here</span>
     <ul class="log-list mono">
-      <li><span class="log-t">[2026]</span> B.Tech, Mathematics &amp; Data Science — NIT Bhopal · <span class="hl-amber">CGPA 8.71</span></li>
-      <li><span class="log-t">[2025]</span> <span class="hl-amber">AIR 6</span> — IIM Sambalpur Ops'timato Case Study · top 6 / 769 teams</li>
-      <li><span class="log-t">[2024]</span> National Round — Smart India Hackathon (SIH)</li>
-      <li><span class="log-t">[2024]</span> Top 10 — Saheogi B-Plan, IIM Ahmedabad · 838 teams</li>
-      <li><span class="log-t">[2024]</span> Hospitality Lead, E-Cell MANIT — led Central India's largest hackathon · 2,117+ participants</li>
-      <li><span class="log-t">[2019]</span> PRMO qualified — Mathematics Olympiad, Class 10</li>
+      <li><span class="log-t">[2019]</span> PRMO qualified at 15 — the moment I realised I liked hard problems</li>
+      <li><span class="log-t">[2022]</span> Joined NIT Bhopal, B.Tech Mathematics &amp; Data Science — found the language of machines</li>
+      <li><span class="log-t">[2024]</span> Hospitality Lead, E-Cell MANIT — built and ran Central India's largest student hackathon · <span class="hl-amber">2,117+ participants</span></li>
+      <li><span class="log-t">[2024]</span> National Round — Smart India Hackathon · one of ~200 teams nationwide</li>
+      <li><span class="log-t">[2024]</span> Top 10 — Saheogi B-Plan, IIM Ahmedabad · 838 competing teams</li>
+      <li><span class="log-t">[2025]</span> <span class="hl-amber">AIR 6</span> — IIM Sambalpur Ops'timato Case Study · top 6 out of 769 teams</li>
+      <li><span class="log-t">[2026]</span> B.Tech completed · <span class="hl-amber">CGPA 8.71</span> · shipped production AI at Leap · still going</li>
     </ul>
   </div>
 </section>
@@ -321,8 +346,17 @@
 <!-- ============ CONTACT ============ -->
 <section class="section contact" id="contact">
   <div class="section-head reveal">
-    <span class="eyebrow mono">05 / HANDSHAKE</span>
-    <h2>Let's build something<br>that <span class="hl-amber">listens</span>.</h2>
+    <span class="eyebrow mono">05 / NEXT CHAPTER</span>
+    <h2>The story isn't<br><span class="hl-amber">finished.</span></h2>
+  </div>
+
+  <div class="about-copy reveal" style="max-width:640px;margin-bottom:52px;">
+    <p style="color:var(--muted);font-size:1.05rem;line-height:1.8;">
+      I'm looking for the next hard problem — the kind where the data is messy,
+      the stakes are real, and the right system actually changes something for someone.
+      If you're building that, or if you just want to talk about LLMs, data pipelines,
+      or what AI can actually do in the real world — I'm here.
+    </p>
   </div>
 
   <div class="contact-row reveal">

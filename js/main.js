@@ -53,11 +53,11 @@
     const ldrPct = document.getElementById('ldr-pct');
 
     const steps = [
-      { text: '▸ loading language model weights...', pct: 22 },
-      { text: '▸ connecting to BigQuery pipeline...',  pct: 44 },
-      { text: '▸ initializing neural renderer...',     pct: 66 },
-      { text: '▸ calibrating particle dynamics...',    pct: 88 },
-      { text: '▸ all systems nominal.',                pct: 100 },
+      { text: '▸ loading sangam_tiwari.json...',       pct: 20 },
+      { text: '▸ indexing 7 years of pattern-finding...', pct: 42 },
+      { text: '▸ mounting gangajal pipeline...',       pct: 62 },
+      { text: '▸ warming neural renderer...',          pct: 82 },
+      { text: '▸ ready. the story starts now.',        pct: 100 },
     ];
 
     steps.forEach(({ text, pct }, i) => {
@@ -311,7 +311,7 @@
      TERMINAL TYPING
      ===================================================== */
   const termEl   = document.getElementById('term-typed');
-  const termText = 'python gangajal_pipeline.py --source calls --extract signal';
+  const termText = 'python gangajal.py --source calls --mode score --lang all';
   if (termEl) {
     if (reduced) { termEl.textContent = termText; }
     else {
