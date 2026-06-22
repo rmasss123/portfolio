@@ -508,24 +508,31 @@
       btn.disabled = true;
 
       try {
-        const res = await fetch(contactForm.action, {
+        const res  = await fetch(contactForm.action, {
           method: 'POST',
           body: new FormData(contactForm),
           headers: { Accept: 'application/json' },
         });
-        if (res.ok) {
+        const json = await res.json().catch(() => ({}));
+
+        if (res.ok && !json.errors && !json.error) {
           btnText.textContent = 'Sent ✓';
           status.textContent  = '▸ message received — I\'ll reply within 24 hrs.';
           status.className    = 'form-note mono visible success';
           contactForm.reset();
         } else {
-          throw new Error();
+          /* surface the actual Formspree error so it's debuggable */
+          const msg = json.error
+            || (json.errors && json.errors.map(e => e.message).join(', '))
+            || ('status ' + res.status);
+          throw new Error(msg);
         }
-      } catch(_) {
+      } catch(err) {
         btnText.textContent = 'Send message';
         btn.style.opacity   = '1';
         btn.disabled        = false;
-        status.textContent  = '▸ something went wrong — try emailing directly.';
+        /* show the real error message in the status line */
+        status.textContent  = '▸ ' + (err.message || 'something went wrong');
         status.className    = 'form-note mono visible error';
       }
     });
