@@ -493,6 +493,45 @@
   });
 
   /* =====================================================
+     CONTACT FORM — Formspree AJAX submission
+     ===================================================== */
+  const contactForm = document.getElementById('contact-form');
+  if (contactForm) {
+    const status  = document.getElementById('form-status');
+    const btn     = contactForm.querySelector('.form-btn');
+    const btnText = contactForm.querySelector('.form-btn-text');
+
+    contactForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      btnText.textContent = 'Sending...';
+      btn.style.opacity = '.7';
+      btn.disabled = true;
+
+      try {
+        const res = await fetch(contactForm.action, {
+          method: 'POST',
+          body: new FormData(contactForm),
+          headers: { Accept: 'application/json' },
+        });
+        if (res.ok) {
+          btnText.textContent = 'Sent ✓';
+          status.textContent  = '▸ message received — I\'ll reply within 24 hrs.';
+          status.className    = 'form-note mono visible success';
+          contactForm.reset();
+        } else {
+          throw new Error();
+        }
+      } catch(_) {
+        btnText.textContent = 'Send message';
+        btn.style.opacity   = '1';
+        btn.disabled        = false;
+        status.textContent  = '▸ something went wrong — try emailing directly.';
+        status.className    = 'form-note mono visible error';
+      }
+    });
+  }
+
+  /* =====================================================
      PAGE TRANSITIONS — glitch out then navigate
      ===================================================== */
   document.querySelectorAll('a[href]').forEach(a => {

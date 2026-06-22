@@ -569,6 +569,41 @@ body.leaving main.page-wrap{animation:pg-leave .36s var(--ease) both}
 }
 @media(max-width:640px){.subpage-hero{padding:120px 18px 40px}}
 
+/* ===================== CONTACT FORM ===================== */
+.msg-form-wrap{margin-top:64px;max-width:680px}
+.msg-form{display:flex;flex-direction:column;gap:22px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.form-group{display:flex;flex-direction:column;gap:8px}
+.form-label{font-size:.68rem;letter-spacing:.18em;color:var(--muted);text-transform:uppercase}
+.form-input{
+  background:rgba(12,17,32,.7);
+  border:1px solid var(--line);
+  border-radius:5px;
+  padding:13px 16px;
+  color:var(--text);
+  font-family:var(--body);
+  font-size:.95rem;
+  outline:none;
+  transition:border-color .25s,box-shadow .25s,background .25s;
+  width:100%;
+}
+.form-input::placeholder{color:rgba(138,148,173,.4)}
+.form-input:focus{
+  border-color:var(--cyan);
+  background:rgba(19,27,48,.85);
+  box-shadow:0 0 0 3px rgba(94,231,255,.07);
+}
+.form-textarea{resize:vertical;min-height:130px;line-height:1.7}
+.form-footer{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.form-btn{display:flex;align-items:center;gap:10px;padding:12px 26px}
+.form-btn-icon{transition:transform .25s var(--ease)}
+.form-btn:hover .form-btn-icon{transform:translateX(5px)}
+.form-note{font-size:.74rem;letter-spacing:.06em;color:var(--muted);opacity:0;transition:opacity .4s}
+.form-note.visible{opacity:1}
+.form-note.success{color:var(--cyan)}
+.form-note.error{color:var(--amber)}
+@media(max-width:560px){.form-row{grid-template-columns:1fr}}
+
 /* ===================== ACCESSIBILITY ===================== */
 :focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
 @media(prefers-reduced-motion:reduce){

@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Sora:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=7">
+<link rel="stylesheet" href="css/style.css?v=8">
 </head>
 <body>
 
@@ -58,6 +58,35 @@
       <a class="btn btn-amber" href="assets/Sangam_Tiwari_Resume.pdf" target="_blank" rel="noopener" data-magnetic>Resume ↗</a>
     </div>
   </div>
+
+  <!-- MESSAGE FORM -->
+  <div class="msg-form-wrap reveal">
+    <span class="eyebrow mono" style="margin-bottom:28px;display:inline-block;">or drop a message directly</span>
+    <form class="msg-form" action="https://formspree.io/f/REPLACE_THIS" method="POST" id="contact-form">
+      <input type="hidden" name="_subject" value="Portfolio message — Sangam Tiwari">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label mono" for="f-name">Name</label>
+          <input class="form-input" type="text" id="f-name" name="name" placeholder="Your name" required autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label class="form-label mono" for="f-email">Email</label>
+          <input class="form-input" type="email" id="f-email" name="email" placeholder="your@email.com" required autocomplete="email">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label mono" for="f-msg">Message</label>
+        <textarea class="form-input form-textarea" id="f-msg" name="message" placeholder="What are you building?" required rows="5"></textarea>
+      </div>
+      <div class="form-footer">
+        <button class="btn btn-amber form-btn" type="submit" data-magnetic>
+          <span class="form-btn-text">Send message</span>
+          <span class="form-btn-icon">→</span>
+        </button>
+        <p class="form-note mono" id="form-status"></p>
+      </div>
+    </form>
+  </div>
 </section>
 
 </main>
@@ -68,6 +97,6 @@
   <span>BLR · IST <span id="ist-clock-2">--:--</span></span>
 </footer>
 
-<script src="js/main.js?v=7"></script>
+<script src="js/main.js?v=8"></script>
 </body>
 </html>
