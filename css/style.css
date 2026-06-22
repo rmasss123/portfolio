@@ -569,6 +569,34 @@ body.leaving main.page-wrap{animation:pg-leave .36s var(--ease) both}
 }
 @media(max-width:640px){.subpage-hero{padding:120px 18px 40px}}
 
+/* ===================== RESUME MODAL ===================== */
+.resume-modal{
+  position:fixed;inset:0;z-index:9985;
+  background:rgba(5,10,21,.97);
+  backdrop-filter:blur(24px);
+  display:flex;flex-direction:column;
+  opacity:0;pointer-events:none;
+  transition:opacity .35s var(--ease);
+}
+.resume-modal.open{opacity:1;pointer-events:all}
+.resume-modal-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 24px;flex-shrink:0;
+  background:rgba(12,17,32,.9);
+  border-bottom:1px solid var(--line);
+}
+.resume-modal-name{font-size:.78rem;letter-spacing:.08em;color:var(--cyan)}
+.resume-modal-frame{flex:1;width:100%;border:none}
+.resume-modal-fallback{display:none}
+@media(max-width:640px){
+  .resume-modal-frame{display:none}
+  .resume-modal-fallback{
+    display:flex;flex-direction:column;align-items:center;
+    justify-content:center;gap:20px;flex:1;text-align:center;padding:32px;
+  }
+  .resume-modal-fallback p{color:var(--muted);line-height:1.7}
+}
+
 /* ===================== CONTACT FORM ===================== */
 .msg-form-wrap{margin-top:64px;max-width:680px}
 .msg-form{display:flex;flex-direction:column;gap:22px}

@@ -51,6 +51,13 @@
   const loader = document.getElementById('loader');
   function runLoader() {
     if (!loader || reduced) { startHeroScramble(); return; }
+    /* skip loader on back-navigation within same session */
+    if (sessionStorage.getItem('st_loaded')) {
+      loader.style.display = 'none';
+      startHeroScramble();
+      return;
+    }
+    sessionStorage.setItem('st_loaded', '1');
 
     const ldrLog = document.getElementById('ldr-log');
     const ldrBar = document.getElementById('ldr-bar');
@@ -537,6 +544,51 @@
       }
     });
   }
+
+  /* =====================================================
+     RESUME MODAL — open inline, no navigation
+     ===================================================== */
+  function openResumeModal() {
+    let modal = document.getElementById('resume-modal');
+    if (!modal) {
+      modal = document.createElement('div');
+      modal.id = 'resume-modal';
+      modal.className = 'resume-modal';
+      modal.innerHTML =
+        '<div class="resume-modal-bar">' +
+          '<span class="resume-modal-name mono">Sangam_Tiwari_Resume.pdf</span>' +
+          '<div style="display:flex;gap:10px;align-items:center">' +
+            '<a class="btn btn-ghost" href="assets/Sangam_Tiwari_Resume.pdf" download ' +
+              'style="padding:7px 14px;font-size:.72rem;">Download ↓</a>' +
+            '<button class="btn btn-ghost resume-modal-close" ' +
+              'style="padding:7px 14px;font-size:.72rem;">✕ Close</button>' +
+          '</div>' +
+        '</div>' +
+        '<iframe src="assets/Sangam_Tiwari_Resume.pdf#toolbar=1" ' +
+          'class="resume-modal-frame" title="Sangam Tiwari Resume"></iframe>' +
+        '<div class="resume-modal-fallback">' +
+          '<p>PDF preview isn\'t available on this device.</p>' +
+          '<a class="btn btn-amber" href="assets/Sangam_Tiwari_Resume.pdf" download>Download Resume ↓</a>' +
+        '</div>';
+      document.body.appendChild(modal);
+
+      const close = () => { modal.classList.remove('open'); document.body.style.overflow = ''; };
+      modal.querySelector('.resume-modal-close').addEventListener('click', close);
+      modal.addEventListener('click', e => { if (e.target === modal) close(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+    }
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  /* intercept all resume links — must run BEFORE page-transitions listener */
+  document.querySelectorAll('a[href="resume.html"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      openResumeModal();
+    });
+  });
 
   /* =====================================================
      PAGE TRANSITIONS — glitch out then navigate
