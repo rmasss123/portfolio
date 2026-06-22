@@ -94,105 +94,141 @@
      ===================================================== */
   const neuralCanvas = document.getElementById('neural-bg');
   if (neuralCanvas && !reduced) {
-    const ctx  = neuralCanvas.getContext('2d');
-    const DPR  = Math.min(devicePixelRatio, 2);
-    let W, H, nodes = [], edges = [], pulses = [];
+    const ctx = neuralCanvas.getContext('2d');
+    const DPR = Math.min(devicePixelRatio, 2);
+    let W, H, nodes = [], pulses = [];
 
-    const LAYERS    = [5, 8, 10, 10, 8, 4];
-    const LAYER_COL = ['#5EE7FF','#8b5cf6','#8b5cf6','#8b5cf6','#8b5cf6','#FFB454'];
+    const COLS   = ['#5EE7FF', '#8b5cf6', '#a78bfa', '#FFB454'];
+    const N      = Math.min(90, Math.floor(innerWidth * innerHeight / 14000));
+    const REACH  = 200 * DPR;   /* max connection distance */
+    const SPEED  = 0.28;        /* node drift speed */
 
     function build() {
-      nodes = []; edges = []; pulses = [];
+      nodes = []; pulses = [];
       W = neuralCanvas.width  = innerWidth  * DPR;
       H = neuralCanvas.height = innerHeight * DPR;
       neuralCanvas.style.width  = innerWidth  + 'px';
       neuralCanvas.style.height = innerHeight + 'px';
 
-      const L      = LAYERS.length;
-      const xStart = W * 0.04, xEnd = W * 0.96;
-      const xStep  = (xEnd - xStart) / (L - 1);
-
-      LAYERS.forEach((cnt, li) => {
-        const x    = xStart + xStep * li;
-        const yGap = H / (cnt + 1);
-        for (let ni = 0; ni < cnt; ni++) {
-          nodes.push({ x, y: yGap * (ni + 1), layer: li, color: LAYER_COL[li], r: 2.8 * DPR, glow: 0 });
-        }
-      });
-
-      for (let li = 0; li < L - 1; li++) {
-        const from = nodes.filter(n => n.layer === li);
-        const to   = nodes.filter(n => n.layer === li + 1);
-        from.forEach(f => to.forEach(t => {
-          if (Math.random() < 0.5) edges.push({ from: f, to: t });
-        }));
+      const count = Math.min(90, Math.floor(W * H / 14000));
+      for (let i = 0; i < count; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        nodes.push({
+          x:     Math.random() * W,
+          y:     Math.random() * H,
+          vx:    Math.cos(angle) * SPEED * (0.3 + Math.random() * 0.7),
+          vy:    Math.sin(angle) * SPEED * (0.3 + Math.random() * 0.7),
+          color: COLS[Math.floor(Math.random() * COLS.length)],
+          r:     (1.4 + Math.random() * 1.2) * DPR,
+          glow:  0,
+          phase: Math.random() * Math.PI * 2,  /* for breathing pulse */
+        });
       }
     }
 
-    function spawnPulse() {
-      const inputs = nodes.filter(n => n.layer === 0);
-      const start  = inputs[Math.floor(Math.random() * inputs.length)];
-      edges.filter(e => e.from === start && Math.random() < 0.65).forEach(e =>
-        pulses.push({ edge: e, t: 0, speed: 0.004 + Math.random() * 0.005 }));
+    function spawnPulse(from, to) {
+      pulses.push({ from, to, t: 0, speed: 0.006 + Math.random() * 0.006, color: from.color });
     }
 
-    function propagate(node) {
-      node.glow = 1;
-      if (node.layer >= LAYERS.length - 1) return;
-      edges.filter(e => e.from === node && Math.random() < 0.55).slice(0, 5).forEach(e =>
-        setTimeout(() => pulses.push({ edge: e, t: 0, speed: 0.004 + Math.random() * 0.005 }), 40));
-    }
-
-    let lastSpawn = 0;
+    let lastPulseSpawn = 0;
     function draw(ts) {
       ctx.clearRect(0, 0, W, H);
 
-      edges.forEach(e => {
-        const g = ctx.createLinearGradient(e.from.x, e.from.y, e.to.x, e.to.y);
-        g.addColorStop(0, e.from.color + '22');
-        g.addColorStop(1, e.to.color   + '15');
-        ctx.beginPath();
-        ctx.moveTo(e.from.x, e.from.y);
-        ctx.lineTo(e.to.x,   e.to.y);
-        ctx.strokeStyle = g;
-        ctx.lineWidth = 0.8 * DPR;
-        ctx.stroke();
+      /* move nodes, bounce off walls */
+      nodes.forEach(n => {
+        n.x += n.vx; n.y += n.vy;
+        if (n.x < 0 || n.x > W) n.vx *= -1;
+        if (n.y < 0 || n.y > H) n.vy *= -1;
+        n.glow = Math.max(0, n.glow - 0.018);
+        n.phase += 0.018;
       });
 
+      /* draw edges between nearby nodes */
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const a = nodes[i], b = nodes[j];
+          const dx = a.x - b.x, dy = a.y - b.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist > REACH) continue;
+
+          const alpha = (1 - dist / REACH) * 0.28;
+          const g = ctx.createLinearGradient(a.x, a.y, b.x, b.y);
+          g.addColorStop(0, a.color + Math.round(alpha * 255).toString(16).padStart(2,'0'));
+          g.addColorStop(1, b.color + Math.round(alpha * 0.6 * 255).toString(16).padStart(2,'0'));
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.strokeStyle = g;
+          ctx.lineWidth = (0.5 + (1 - dist / REACH) * 0.7) * DPR;
+          ctx.stroke();
+        }
+      }
+
+      /* draw pulses */
       pulses = pulses.filter(p => {
         p.t += p.speed;
-        if (p.t >= 1) { propagate(p.edge.to); return false; }
-        const x   = p.edge.from.x + (p.edge.to.x - p.edge.from.x) * p.t;
-        const y   = p.edge.from.y + (p.edge.to.y - p.edge.from.y) * p.t;
-        const col = p.edge.from.color;
-        const grd = ctx.createRadialGradient(x, y, 0, x, y, 9 * DPR);
-        grd.addColorStop(0, col + '88');
-        grd.addColorStop(1, col + '00');
-        ctx.beginPath(); ctx.arc(x, y, 9 * DPR, 0, Math.PI * 2);
+        if (p.t >= 1) { p.to.glow = 1; return false; }
+        const x = p.from.x + (p.to.x - p.from.x) * p.t;
+        const y = p.from.y + (p.to.y - p.from.y) * p.t;
+
+        /* outer glow */
+        const grd = ctx.createRadialGradient(x, y, 0, x, y, 11 * DPR);
+        grd.addColorStop(0, p.color + 'cc');
+        grd.addColorStop(0.4, p.color + '44');
+        grd.addColorStop(1, p.color + '00');
+        ctx.beginPath(); ctx.arc(x, y, 11 * DPR, 0, Math.PI * 2);
         ctx.fillStyle = grd; ctx.fill();
-        ctx.beginPath(); ctx.arc(x, y, 2 * DPR, 0, Math.PI * 2);
-        ctx.fillStyle = col; ctx.globalAlpha = 0.9; ctx.fill(); ctx.globalAlpha = 1;
+
+        /* hard core */
+        ctx.beginPath(); ctx.arc(x, y, 2.2 * DPR, 0, Math.PI * 2);
+        ctx.fillStyle = p.color; ctx.globalAlpha = 0.95; ctx.fill();
+        ctx.globalAlpha = 1;
         return true;
       });
 
+      /* draw nodes */
       nodes.forEach(n => {
-        n.glow = Math.max(0, n.glow - 0.022);
-        if (n.glow > 0.04) {
-          const halo = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 18 * DPR);
-          halo.addColorStop(0, n.color + Math.round(n.glow * 110).toString(16).padStart(2, '0'));
+        const breathe = 0.5 + 0.5 * Math.sin(n.phase);
+
+        if (n.glow > 0.05) {
+          const halo = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 22 * DPR);
+          halo.addColorStop(0, n.color + Math.round(n.glow * 130).toString(16).padStart(2,'0'));
           halo.addColorStop(1, n.color + '00');
-          ctx.beginPath(); ctx.arc(n.x, n.y, 18 * DPR, 0, Math.PI * 2);
+          ctx.beginPath(); ctx.arc(n.x, n.y, 22 * DPR, 0, Math.PI * 2);
           ctx.fillStyle = halo; ctx.fill();
         }
-        ctx.beginPath(); ctx.arc(n.x, n.y, n.r + 2.5 * DPR, 0, Math.PI * 2);
-        ctx.strokeStyle = n.color; ctx.lineWidth = 0.7 * DPR;
-        ctx.globalAlpha = 0.18 + n.glow * 0.5; ctx.stroke();
+
+        /* outer ring */
+        ctx.beginPath(); ctx.arc(n.x, n.y, (n.r + 3) * DPR, 0, Math.PI * 2);
+        ctx.strokeStyle = n.color;
+        ctx.lineWidth = 0.6 * DPR;
+        ctx.globalAlpha = (0.12 + breathe * 0.08 + n.glow * 0.5);
+        ctx.stroke();
+
+        /* core dot */
         ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-        ctx.fillStyle = n.color; ctx.globalAlpha = 0.32 + n.glow * 0.68; ctx.fill();
+        ctx.fillStyle = n.color;
+        ctx.globalAlpha = 0.3 + breathe * 0.15 + n.glow * 0.55;
+        ctx.fill();
         ctx.globalAlpha = 1;
       });
 
-      if (ts - lastSpawn > 900) { spawnPulse(); lastSpawn = ts; }
+      /* spawn pulses periodically */
+      if (ts - lastPulseSpawn > 700) {
+        lastPulseSpawn = ts;
+        /* pick a random node and fire pulses along its nearby connections */
+        const src = nodes[Math.floor(Math.random() * nodes.length)];
+        let fired = 0;
+        for (let i = 0; i < nodes.length && fired < 3; i++) {
+          if (nodes[i] === src) continue;
+          const dx = src.x - nodes[i].x, dy = src.y - nodes[i].y;
+          if (Math.sqrt(dx*dx + dy*dy) < REACH && Math.random() < 0.4) {
+            spawnPulse(src, nodes[i]);
+            fired++;
+          }
+        }
+      }
+
       requestAnimationFrame(draw);
     }
 
